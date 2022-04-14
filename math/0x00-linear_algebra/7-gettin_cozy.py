@@ -82,6 +82,7 @@ def test_two():
 
 
 def test_three():
+    """ test one and two matrices"""
     m1 = [[], [], []]
     m2 = [[], [], []]
     m = cat_matrices2D(m1, m2, axis=1)
