@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """ fuctions for matrix shape"""
 
+
 def matrix_shape(matrix):
     """ Returns the shape of the matrix"""
     if type(matrix) != list or not matrix:
