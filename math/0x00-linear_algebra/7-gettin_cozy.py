@@ -10,7 +10,7 @@ def is_list(matrix):
 def matrix_shape(matrix):
     """ Returns the shape of the matrix"""
     if type(matrix) != list or not matrix:
-        return []
+        return [0, ]
     return [len(matrix), *matrix_shape(matrix[0])]
 
 
@@ -34,12 +34,15 @@ def cat_matrices2D(mat1, mat2, axis=0, firts=True):
     """ Concat matrices to a single matrix """
     if not is_list(mat1) and not is_list(mat2):
         return None
+
     shape_one = matrix_shape(mat1)
     shape_two = matrix_shape(mat2)
     if firts and not equal_without(shape_one, shape_two, axis):
         return None
+
     if (axis == 0):
         return [*mat1, *mat2]
+
     result = list(range(len(mat1)))
     for i in range(len(mat1)):
         result[i] = cat_matrices2D(mat1[i], mat2[i], axis - 1, False)
@@ -78,6 +81,17 @@ def test_two():
     print(m)
 
 
+def test_three():
+    m1 = [[], [], []]
+    m2 = [[], [], []]
+    m = cat_matrices2D(m1, m2, axis=1)
+    exist = m is m1 or m is m2
+    if not is_list(m) or exist or not len(m) or not is_list(m[0]):
+        print("Not a new matrix")
+    print(m)
+
+
 if __name__ == '__main__':
     test_one()
     test_two()
+    test_three()
