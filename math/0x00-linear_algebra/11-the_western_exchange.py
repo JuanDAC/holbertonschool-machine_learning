@@ -3,5 +3,5 @@
 
 
 def np_transpose(matrix):
-    """ transposed of matrix"""
+    """ transposed of matrix """
     return matrix.T
