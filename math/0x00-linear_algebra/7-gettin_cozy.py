@@ -111,6 +111,7 @@ def test_three():
 
 
 def test_four():
+    """" Test three matrices with different matrices"""
     m1 = [[51, 24, 73], [93, 45, 77]]
     m2 = [[], [], []]
     m = cat_matrices2D(m1, m2)
