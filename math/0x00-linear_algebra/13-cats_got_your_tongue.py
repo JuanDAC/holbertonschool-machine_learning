@@ -1,13 +1,8 @@
 #!/usr/bin/env python3
-
+""" Functions that can be used to concat two matrices"""
 import numpy as np
-def np_cat(mat1, mat2, axis=0):
-    pass
 
-if __name__ == "__main__":
-    mat1 = np.array([[11, 22, 33], [44, 55, 66]])
-    mat2 = np.array([[1, 2, 3], [4, 5, 6]])
-    mat3 = np.array([[7], [8]])
-    print(np_cat(mat1, mat2))
-    print(np_cat(mat1, mat2, axis=1))
-    print(np_cat(mat1, mat3, axis=1))
+
+def np_cat(mat1, mat2, axis=0):
+    """ concatenate the two matrices"""
+    return np.concatenate((mat1, mat2), axis=axis)
