@@ -16,6 +16,7 @@ def matrix_shape(matrix):
 
 def equal_without(matrix1, matrix2, without=0, index=0):
     """Returns true if the two matrices are equal without any index"""
+
     if without != -1:
         del matrix1[without]
         del matrix2[without]
@@ -24,8 +25,11 @@ def equal_without(matrix1, matrix2, without=0, index=0):
     if index >= len(matrix1):
         return True
 
-    if matrix1[index] != matrix2[index]:
-        return False
+    try:
+        if matrix1[index] != matrix2[index]:
+            return False
+    except IndexError:
+        return True
 
     return equal_without(matrix1, matrix2, without, index + 1)
 
@@ -83,7 +87,39 @@ def test_two():
 
 def test_three():
     """ test one and two matrices"""
+    m1 = [[], []]
+    m2 = [[], [], []]
+    m = cat_matrices2D(m1, m2)
+    exist = m is m1 or m is m2
+    if not is_list(m) or exist or not len(m) or not is_list(m[0]):
+        print("Not a new matrix")
+    print(m)
     m1 = [[], [], []]
+    m2 = [[], []]
+    m = cat_matrices2D(m1, m2, axis=0)
+    exist = m is m1 or m is m2
+    if not is_list(m) or exist or not len(m) or not is_list(m[0]):
+        print("Not a new matrix")
+    print(m)
+    m1 = [[], [], []]
+    m2 = [[], [], []]
+    m = cat_matrices2D(m1, m2, axis=1)
+    exist = m is m1 or m is m2
+    if not is_list(m) or exist or not len(m) or not is_list(m[0]):
+        print("Not a new matrix")
+    print(m)
+
+
+def test_four():
+    m1 = [[51, 24, 73], [93, 45, 77]]
+    m2 = [[], [], []]
+    m = cat_matrices2D(m1, m2)
+    print(m)
+    m2 = [[51, 24, 73], [93, 45, 77]]
+    m1 = [[], [], []]
+    m = cat_matrices2D(m1, m2, axis=0)
+    print(m)
+    m1 = [[75, 23, 58], [32, 5, 67], [34, 65, 22]]
     m2 = [[], [], []]
     m = cat_matrices2D(m1, m2, axis=1)
     exist = m is m1 or m is m2
@@ -96,3 +132,4 @@ if __name__ == '__main__':
     test_one()
     test_two()
     test_three()
+    test_four()
