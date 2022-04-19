@@ -88,5 +88,4 @@ figure_ax5.hist(student_grades, bins=b, edgecolor='black')
 # Remove spaces betweeb graph
 figure.tight_layout()
 
-plt.figure(figure=figure)
 plt.show()

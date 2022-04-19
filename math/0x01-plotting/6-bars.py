@@ -30,7 +30,4 @@ ax.bar(persons, fruit[3], width, bottom=fruit[2] + fruit[1] + fruit[0],
        color='#ffe5b4', label="peaches")
 plt.legend()
 
-
-if __name__ == "__main__":
-    RenderFigure = __import__('render_figure').RenderFigure
-    RenderFigure(title="5. All in One", figure=figure)
+plt.show()

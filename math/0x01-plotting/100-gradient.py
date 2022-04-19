@@ -17,8 +17,5 @@ ax.set_title("Mountain Elevation")
 plt.colorbar(path, label="elevation (m)")
 plt.xlabel("x coordinate (m)")
 plt.ylabel("y coordinate (m)")
+plt.show()
 
-
-if __name__ == "__main__":
-    RenderFigure = __import__('render_figure').RenderFigure
-    RenderFigure(title="5. All in One", figure=figure)

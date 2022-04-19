@@ -24,6 +24,6 @@ axes.scatter(x, y, z, c=labels, cmap=cm.plasma)
 
 plt.xlabel("U1")
 plt.ylabel("U2")
-plt.zlabel("U3")
+axes.set_zlabel("U3")
 plt.title("PCA of Iris Dataset")
 plt.show()
