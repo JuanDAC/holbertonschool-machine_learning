@@ -28,3 +28,5 @@ def poly_integral(poly, C=0, power=1):
 if __name__ == "__main__":
     poly = [5, 3, 0, 1]
     print(poly_integral(poly))
+    print(poly_integral([7, 4, 6, 1, 5]))
+    print(poly_integral([4, 8, 2, 4, 7, 1, 9], C=5))
