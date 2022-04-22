@@ -6,7 +6,7 @@ Function that can be used summation of the given number of squared
 
 def summation_i_squared(n):
     """ Returns the summation of the given number of squared"""
-    if n <= 0 or n is None:
+    if n is None or n <= 0:
         return None
     return n * (n + 1) * (2 * n + 1) / 6
 
