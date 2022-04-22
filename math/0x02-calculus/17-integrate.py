@@ -16,7 +16,7 @@ def poly_integral(poly, C=0, power=1):
     if coefficient is None:
         return []
 
-    if coefficient == 0 and len(integrals) == 1:
+    if coefficient == 0 and len(integrals) == 1 and len(poly) == 1:
         return [*integrals, *poly_integral(poly, C, power + 1)]
 
     if coefficient == 0:
@@ -36,11 +36,11 @@ if __name__ == "__main__":
     print(poly_integral(poly))
     print(poly_integral([7, 4, 6, 1, 5]))
     print(poly_integral([4, 8, 2, 4, 7, 1, 9], C=5))
-    print(poly_integral([0]))
-    print(poly_integral([0], C=7))
     print(poly_integral(5))
     print(poly_integral([]))
     print(poly_integral([5], C=None))
     """
+    print(poly_integral([0]))
+    print(poly_integral([0], C=7))
     print(poly_integral([6, 5, 0, 0, -3]))
     print(poly_integral([0, 0, 3, -1, 0, 6, 2], C=6))
