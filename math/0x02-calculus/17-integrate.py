@@ -19,6 +19,7 @@ def poly_integral(poly, C=0, power=1):
 
     if power != 0:
         result = (coefficient / power)
+        result = result if round(result) - result > 0 else round(result)
         return [*integrals, result, *poly_integral(poly, C, power + 1)]
 
     return [*integrals, coefficient, *poly_integral(poly, C, power + 1)]
