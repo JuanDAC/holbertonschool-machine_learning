@@ -6,10 +6,9 @@ Function that can be used summation of the given number of squared
 
 def summation_i_squared(n):
     """ Returns the summation of the given number of squared"""
-    if n < 1 or n is None:
+    if n <= 0 or n is None:
         return None
-    from functools import reduce
-    return reduce(lambda sum, x: sum + (x ** 2), range(1, n + 1))
+    return n * (n + 1) * (2 * n + 1) / 6
 
 
 if __name__ == '__main__':
