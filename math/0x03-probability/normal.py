@@ -6,7 +6,7 @@ def factorial(number, num=None):
     """Method to calculate Factorial"""
     if num is None:
         num = number
-    if num <= 1:
+    if num < 2:
         return 1
     return factorial(number, num - 1) * num
 
