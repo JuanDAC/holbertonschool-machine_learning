@@ -25,6 +25,8 @@ class Normal:
     """Normal distribution"""
 
     def __init__(self, data=None, mean=0., stddev=1.):
+        self.pi = 3.1415926536
+        self.e = 2.7182818285
         if data is None:
             self.mean = float(mean)
             self.stddev = float(stddev)
