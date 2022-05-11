@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+""" This class represents a neuron in the network. """
 
 import numpy as np
 
