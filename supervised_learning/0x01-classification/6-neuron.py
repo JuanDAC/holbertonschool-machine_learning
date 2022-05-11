@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""Only just one neuron"""
 
 import numpy as np
 
