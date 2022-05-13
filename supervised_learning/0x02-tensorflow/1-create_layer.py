@@ -1,12 +1,7 @@
 #!/usr/bin/env python3
 """Create a placeholders"""
 
-import tensorflow as tf
-
-try:
-    tf.placeholder
-except AttributeError:
-    tf = tf.compat.v1
+import tensorflow.compat.v1 as tf
 
 
 def create_layer(prev, n, activation):
