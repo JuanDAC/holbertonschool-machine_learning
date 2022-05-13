@@ -18,7 +18,7 @@ def create_layer(prev, n, activation):
         Previous value of layer
     n : int
         The number of nodes in the layer to create
-    activation : function  
+    activation : function
         activation function
     ...
     Return
@@ -28,10 +28,9 @@ def create_layer(prev, n, activation):
     """
     kernel_initializer = tf.keras.initializers.VarianceScaling(mode='fan_avg')
     layer = tf.keras.layers.Dense(
-        units=n, 
+        units=n,
         activation=activation,
         kernel_initializer=kernel_initializer,
         name="layer"
     )
     return layer(prev)
-

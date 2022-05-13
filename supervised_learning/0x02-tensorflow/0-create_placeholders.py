@@ -20,7 +20,7 @@ def create_placeholders(nx, classes):
         The number of classes in our classifier
     Returns
     _______
-    placeholders : tuple 
+    placeholders : tuple
         Placeholders named x and y, respectively
     """
     placeholders = (
