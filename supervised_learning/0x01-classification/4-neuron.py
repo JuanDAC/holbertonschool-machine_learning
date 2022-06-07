@@ -49,7 +49,7 @@ class Neuron:
         """ Evaluate neuron """
         self.forward_prop(X)
         cost = self.cost(Y, self.A)
-        # np.rint: Round elements of the array to the nearest integer.
+        # Round elements of the array to the nearest integer.
         prediction = np.rint(self.A).astype(int)
         return (prediction, cost)
 
