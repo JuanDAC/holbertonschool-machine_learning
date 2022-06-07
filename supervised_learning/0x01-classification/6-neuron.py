@@ -34,9 +34,8 @@ class Neuron:
 
     def forward_prop(self, X):
         """ Calculate the forward propagation of the neuron. """
-        x = np.dot(self.__W, X) + self.__b
-        self.__A = 1 / 1 + np.exp(-x)
-        return self.__A
+        self.__A = sigmoid(np.dot(self.W, X) + self.b)
+        return self.A
 
     def cost(self, Y, A):
         """ Const logistic regression """
@@ -76,3 +75,8 @@ class Neuron:
             self.gradient_descent(X, Y, self.A, alpha)
 
         return self.evaluate(X, Y)
+
+
+def sigmoid(z):
+    """Activation function"""
+    return 1 / (1 + np.exp(-z))

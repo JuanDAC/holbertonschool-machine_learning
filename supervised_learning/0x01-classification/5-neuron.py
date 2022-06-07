@@ -10,7 +10,7 @@ class Neuron:
     def __init__(self, nx):
         """ Construct a new Neuron. """
         if type(nx) is not int:
-            raise ValueError("nx must be an integer")
+            raise TypeError("nx must be an integer")
         if nx < 1:
             raise ValueError("nx must be a positive integer")
         self.__b = 0
@@ -34,9 +34,8 @@ class Neuron:
 
     def forward_prop(self, X):
         """ Calculate the forward propagation of the neuron. """
-        x = np.dot(self.__W, X) + self.__b
-        self.__A = 1 / 1 + np.exp(-x)
-        return self.__A
+        self.__A = sigmoid(np.dot(self.W, X) + self.b)
+        return self.A
 
     def cost(self, Y, A):
         """ Const logistic regression """
@@ -59,3 +58,8 @@ class Neuron:
 
         self.__b = self.b - bias_derivative * alpha
         self.__W = self.W - (weight_derivative * alpha).T
+
+
+def sigmoid(z):
+    """Activation function"""
+    return 1 / (1 + np.exp(-z))

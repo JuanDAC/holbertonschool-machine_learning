@@ -32,13 +32,17 @@ class Neuron:
         """" Prediction of the neuron. """
         return self.__A
 
-    def forward_prop(self, X):
-        """ Calculate the forward propagation of the neuron. """
-        x = np.dot(self.__W, X) + self.__b
-        self.__A = 1 / 1 + np.exp(-x)
-        return self.__A
-
     def cost(self, Y, A):
         """ Const logistic regression """
         cost = Y * np.log(A) + np.log(1.0000001 - A) * (1 - Y)
         return (-cost.sum() / len(np.transpose(Y)))
+
+    def forward_prop(self, X):
+        """ Calculate the forward propagation of the neuron. """
+        self.__A = sigmoid(np.dot(self.W, X) + self.b)
+        return self.A
+
+
+def sigmoid(z):
+    """Activation function"""
+    return 1 / (1 + np.exp(-z))
