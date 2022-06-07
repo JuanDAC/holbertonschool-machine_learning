@@ -12,7 +12,9 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid,
     """
        Trains a loaded neural network model using
        mini-batch gradient descent
-       Args:
+        ...
+        Parameters
+        ----------
          X_train: numpy.ndarray - (m, 784) containing training data
          Y_train: numpy.ndarray - (m, 10) one-hot containing traing labels
          X_valid: numpy.ndarray - (m, 784) containing validation data
