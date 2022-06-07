@@ -39,13 +39,19 @@ class Neuron:
 
     def cost(self, Y, A):
         """ Const logistic regression """
-        cost = Y * np.log(A) + np.log(1.0000001 - A) * (1 - Y)
-        return (-cost.sum() / len(np.transpose(Y)))
+        cost1 = Y * np.log(A)
+        cost2 = (1 - Y) * np.log(1.0000001 - A)
+        all_consts = cost1 + cost2
+        number_of_classes = Y.shape()[1]
+        return -all_consts.sum() / number_of_classes
 
     def evaluate(self, X, Y):
         """ Evaluate neuron """
         self.forward_prop(X)
-        return (self.A, self.cost(Y, self.A))
+        cost = self.cost(Y, self.A)
+        # np.rint: Round elements of the array to the nearest integer.
+        prediction = np.rint(self.A).astype(int)
+        return (prediction, cost)
 
 
 def sigmoid(z):
