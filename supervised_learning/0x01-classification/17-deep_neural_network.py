@@ -10,7 +10,7 @@ class DeepNeuralNetwork:
 
     def __init__(self, nx, layers):
         """initialiaze deep neural network"""
-        if type(nx) != int:
+        if type(nx) is not int:
             raise TypeError("nx must be an integer")
         if nx < 1:
             raise ValueError("nx must be a positive integer")
