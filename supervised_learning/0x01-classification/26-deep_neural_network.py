@@ -3,6 +3,7 @@
 
 
 import numpy as np
+from matplotlib import pyplot as plt
 import pickle
 
 
@@ -51,6 +52,21 @@ class DeepNeuralNetwork:
         """ A dictionary to hold all weights and biased of the network"""
         return self.__weights
 
+    @cache.setter
+    def cache(self, value):
+        """ A dictionary to hold all intermediary values of the network"""
+        self.__cache = value
+
+    @L.setter
+    def L(self, value):
+        """The number of layers in the neural network"""
+        self.__L = value
+
+    @weights.setter
+    def weights(self, value):
+        """ A dictionary to hold all weights and biased of the network"""
+        self.__weights = value
+
     def forward_prop(self, X):
         """Forward propagation"""
         self.__cache['A0'] = X
@@ -70,17 +86,10 @@ class DeepNeuralNetwork:
             Y: correct labels for the input data
             A: activated output of the neuron for each(prediction)
         """
-        """take the error when label = 1"""
         cost1 = Y * np.log(A)
-        """take the error when label = 0"""
         cost2 = (1 - Y) * np.log(1.0000001 - A)
-        """Take the sum of both costs"""
         total_cost = cost1 + cost2
-        """Calculate the number of observations"""
-        """m : number of classes (dog, cat, fish)"""
         m = len(np.transpose(Y))
-        """print(m)"""
-        """Take the average cost"""
         cost_avg = -total_cost.sum() / m
         return cost_avg
 
@@ -90,9 +99,7 @@ class DeepNeuralNetwork:
         """
         prediction, cache = self.forward_prop(X)
         cost = self.cost(Y, prediction)
-        # np.rint: Round elements of the array to the nearest integer.
         prediction = np.rint(prediction).astype(int)
-        # print(prediction.shape)
         return (prediction, cost)
 
     def gradient_descent(self, Y, cache, alpha=0.05):
@@ -104,20 +111,14 @@ class DeepNeuralNetwork:
         self.__cache = cache
         m = len(Y[0])
         for i in range(self.__L, 0, -1):
-            # Derivate cost function OUTPUT LAYER
             if i == self.__L:
                 dzl = self.__cache['A' + str(i)] - Y
-            # gradient
             X = self.__cache['A' + str(i - 1)]
             weight_derivative_l = np.dot(X, dzl.T) / m
             bias_derivative_l = np.sum(dzl, axis=1, keepdims=True) / m
-            # derivate sigmoid
             d_sigmoid = derivate_sigmoid(self.__cache['A' + str(i - 1)])
-            # derivate cost function
             dzl_1 = np.dot(self.__weights['W' + str(i)].T, dzl) * d_sigmoid
-            # updating last derivate
             dzl = dzl_1
-            # Updating weigths and bias output layer
             wl = self.__weights['b' + str(i)]
             restw = (alpha * bias_derivative_l)
             bl = self.__weights['W' + str(i)]
@@ -136,11 +137,8 @@ class DeepNeuralNetwork:
         if alpha <= 0:
             raise ValueError("alpha must be positive")
         for i in range(iterations):
-            # calculate predictions
             AL, cache = self.forward_prop(X)
-            # Using gradient to minimize error
             self.gradient_descent(Y, cache, alpha)
-        # Evaluate the training data
         result = self.evaluate(X, Y)
         return result
 
@@ -158,12 +156,9 @@ class DeepNeuralNetwork:
         costs = []
         iterat = []
         for i in range(iterations):
-            # calculate predictions
             AL, cache = self.forward_prop(X)
-            # Using gradient to minimize error
             self.gradient_descent(Y, cache, alpha)
             if verbose is True and i % step == 0:
-                # Calculate current cost
                 current_cost = self.cost(Y, AL)
                 costs.append(current_cost)
                 iterat.append(i)
@@ -174,7 +169,6 @@ class DeepNeuralNetwork:
             plt.ylabel("cost")
             plt.title("Training Cost")
             plt.show()
-        # Evaluate the training data
         result = self.evaluate(X, Y)
         return result
 
