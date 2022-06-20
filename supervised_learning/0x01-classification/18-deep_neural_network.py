@@ -50,17 +50,18 @@ class DeepNeuralNetwork:
         """ A dictionary to hold all weights and biased of the network"""
         return self.__weights
 
-    @cache.setter
-    def cache(self, value):
-        """ A dictionary to hold all intermediary values of the network"""
-        self.__cache = value
+    def forward_prop(self, X):
+        """Forward propagation"""
+        self.__cache['A0'] = X
+        for i in range(self.__L):
+            w_layer = self.__weights['W' + str(i + 1)]
+            b_layer = self.__weights['b' + str(i + 1)]
+            activation = sigmoid(np.dot(w_layer, X) + b_layer)
+            X = activation
+            self.__cache['A' + str(i + 1)] = activation
+        return self.__cache['A{}'.format(self.__L)], self.__cache
 
-    @L.setter
-    def L(self, value):
-        """The number of layers in the neural network"""
-        self.__L = value
 
-    @weights.setter
-    def weights(self, value):
-        """ A dictionary to hold all weights and biased of the network"""
-        self.__weights = value
+def sigmoid(x):
+    """Sigmoid function"""
+    return 1 / (1 + np.exp(-x))

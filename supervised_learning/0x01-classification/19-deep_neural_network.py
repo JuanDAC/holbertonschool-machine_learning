@@ -50,17 +50,33 @@ class DeepNeuralNetwork:
         """ A dictionary to hold all weights and biased of the network"""
         return self.__weights
 
-    @cache.setter
-    def cache(self, value):
-        """ A dictionary to hold all intermediary values of the network"""
-        self.__cache = value
+    def forward_prop(self, X):
+        """Forward propagation"""
+        self.__cache['A0'] = X
+        for i in range(self.__L):
+            w_layer = self.__weights['W' + str(i + 1)]
+            b_layer = self.__weights['b' + str(i + 1)]
+            activation = sigmoid(np.dot(w_layer, X) + b_layer)
+            X = activation
+            self.__cache['A' + str(i + 1)] = activation
+        return self.__cache['A{}'.format(self.__L)], self.__cache
 
-    @L.setter
-    def L(self, value):
-        """The number of layers in the neural network"""
-        self.__L = value
+    def cost(self, Y, A):
+        """
+        Cost function CROSS ENTROPY
+        Cost=(labels*log(predictions)+(1-labels)*log(1-predictions))/len(labels)
+        Params:
+            Y: correct labels for the input data
+            A: activated output of the neuron for each(prediction)
+        """
+        cost1 = Y * np.log(A)
+        cost2 = (1 - Y) * np.log(1.0000001 - A)
+        total_cost = cost1 + cost2
+        m = len(np.transpose(Y))
+        cost_avg = -total_cost.sum() / m
+        return cost_avg
 
-    @weights.setter
-    def weights(self, value):
-        """ A dictionary to hold all weights and biased of the network"""
-        self.__weights = value
+
+def sigmoid(x):
+    """Sigmoid function"""
+    return 1 / (1 + np.exp(-x))
