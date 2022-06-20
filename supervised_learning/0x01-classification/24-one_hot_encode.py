@@ -11,5 +11,8 @@ def one_hot_encode(Y, classes):
         return None
     if type(classes) is not int:
         return None
-    one_hot = np.eye(classes)[Y]
-    return one_hot.T
+    try:
+        one_hot = np.eye(classes)[Y]
+        return one_hot.T
+    except Exception:
+        return None
