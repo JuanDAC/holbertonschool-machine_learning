@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 
+
 def mirror(matrix, x):
   return [matrix[i][1:] for i in range(len(matrix)) if i != x]
       
+
 def shape(matrix = []):
   if not matrix or type(matrix) != list:
     return (0, 0, 0)
 
   return (len(matrix), *shape(matrix[0]))
+
 
 def determinant(matrix):
   if type(matrix) != list or type(matrix[0]) != list:
