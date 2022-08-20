@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """ determinant.py - determinant of a matrix """
 
+
 def reduce(callback, list_of_lists):
     """ reduce(callback, list_of_lists) returns the result of the
     callback function applied to the list of lists """
