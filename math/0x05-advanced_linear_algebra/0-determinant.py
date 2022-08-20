@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+from functools import reduce
+
 
 def mirror(matrix, x):
     """ mirror(matrix, x) returns a matrix with the xth row removed """
@@ -19,9 +21,15 @@ def get_sign(x):
     return (-1) ** (x)
 
 
+def validation_of_types(matrix):
+    """ validation_of_types(matrix) returns True if matrix is not a list of lists """
+    return type(matrix) != list or reduce((lambda acum, l:  acum or type(l) != list), [False, *matrix])
+    
+
 def determinant(matrix):
     """ determinant(matrix) returns the determinant of a matrix """
-    if type(matrix) != list or type(matrix[0]) != list:
+
+    if validation_of_types(matrix):
         raise TypeError("matrix must be a list of lists")
 
     first_dimention, second_dimention, *_ = shape(matrix)
