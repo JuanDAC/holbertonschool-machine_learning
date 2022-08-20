@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
 def reduce(callback, list_of_lists):
-    """ reduce(callback, list_of_lists) returns the result of the callback function applied to the list of lists """
+    """ reduce(callback, list_of_lists) returns the result of the
+    callback function applied to the list of lists """
     current = list_of_lists[0]
     for i in range(1, len(list_of_lists)):
         current = callback(current, list_of_lists[i])
@@ -27,9 +28,12 @@ def get_sign(x):
 
 
 def validation_of_types(matrix):
-    """ validation_of_types(matrix) returns True if matrix is not a list of lists """
-    return type(matrix) != list or reduce((lambda acum, l:  acum or type(l) != list), [False, *matrix])
-    
+    """ validation_of_types(matrix) returns True if matrix
+    is not a list of lists """
+    return type(matrix) != list or reduce(
+        (lambda acum, l:  acum or type(l) != list),
+        [False, *matrix])
+
 
 def determinant(matrix):
     """ determinant(matrix) returns the determinant of a matrix """
