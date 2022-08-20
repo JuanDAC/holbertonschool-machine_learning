@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 
-from functools import reduce
+def reduce(callback, list_of_lists):
+    """ reduce(callback, list_of_lists) returns the result of the callback function applied to the list of lists """
+    current = list_of_lists[0]
+    for i in range(1, len(list_of_lists)):
+        current = callback(current, list_of_lists[i])
+    return current
 
 
 def mirror(matrix, x):
