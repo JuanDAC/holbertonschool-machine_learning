@@ -11,6 +11,14 @@ def reduce(callback, list_of_lists):
     return current
 
 
+def validation_of_types(matrix):
+    """ validation_of_types(matrix) returns True if matrix
+    is not a list of lists """
+    return type(matrix) != list or reduce(
+        (lambda acum, l:  acum or type(l) != list),
+        [False, *matrix])
+
+
 def mirror(matrix, x):
     """ mirror(matrix, x) returns a matrix with the xth row removed """
     return [matrix[i][1:] for i in range(len(matrix)) if i != x]
@@ -27,14 +35,6 @@ def shape(matrix=[]):
 def get_sign(x):
     """ get_sign(i, j) returns the sign of the determinant """
     return (-1) ** (x)
-
-
-def validation_of_types(matrix):
-    """ validation_of_types(matrix) returns True if matrix
-    is not a list of lists """
-    return type(matrix) != list or reduce(
-        (lambda acum, l:  acum or type(l) != list),
-        [False, *matrix])
 
 
 def determinant(matrix):
