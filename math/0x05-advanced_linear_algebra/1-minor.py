@@ -6,6 +6,7 @@ def reduce(callback, list_of_lists):
     """ reduce(callback, list_of_lists) returns the result of the
     callback function applied to the list of lists """
     current = list_of_lists[0]
+
     for i in range(1, len(list_of_lists)):
         current = callback(current, list_of_lists[i])
     return current
@@ -52,16 +53,24 @@ def determinant_minor(matrix, x, y):
         - mirror_of_matrix[0][1] * mirror_of_matrix[1][0]
 
 
+def all_shapes_equals(matrix):
+    """ shapes of sub matrix """
+    base_len = len(matrix)
+    return reduce(
+        (lambda acum, l: acum and base_len == len(l)),
+        [True, *matrix]
+    )
+
+
 def minor(matrix):
     """ minor of a matrix """
-
     if validation_of_types(matrix):
         raise TypeError("matrix must be a list of lists")
 
-    first_dimention, second_dimention, *_ = shape(matrix)
-
-    if first_dimention != second_dimention:
+    if not all_shapes_equals(matrix):
         raise ValueError("matrix must be a non-empty square matrix")
+
+    first_dimention, second_dimention, *_ = shape(matrix)
 
     if first_dimention == 1 and second_dimention == 1:
         return [[1]]
