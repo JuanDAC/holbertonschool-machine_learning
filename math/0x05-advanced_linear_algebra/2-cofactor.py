@@ -81,7 +81,7 @@ def cofactor(matrix):
     if first_dimention == 3 and second_dimention == 3:
         return transpose([
             [
-                determinant_minor(matrix, x, y) * get_sign(x + y) 
+                determinant_minor(matrix, x, y) * get_sign(x + y)
                 for x in range(second_dimention)
             ]
             for y in range(first_dimention)
