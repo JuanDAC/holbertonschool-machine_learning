@@ -88,7 +88,7 @@ def determinant_minor(matrix, x, y):
     """ determinat minor """
     mirror_of_matrix = mirror(matrix, x, y)
     if len(mirror_of_matrix) > 2:
-        return determinant(mirror_of_matrix) * get_sign(x + y)
+        return determinant(mirror_of_matrix)
 
     return mirror_of_matrix[0][0] * mirror_of_matrix[1][1] \
         - mirror_of_matrix[0][1] * mirror_of_matrix[1][0]

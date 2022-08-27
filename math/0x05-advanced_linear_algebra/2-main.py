@@ -2,25 +2,17 @@
 
 
 if __name__ == '__main__':
-
     cofactor = __import__('2-cofactor').cofactor
 
-    mat1 = [[5]]
-    mat2 = [[1, 2], [3, 4]]
-    mat3 = [[1, 1], [1, 1]]
-    mat4 = [[5, 7, 9], [3, 1, 8], [6, 2, 4]]
-    mat5 = []
-    mat6 = [[1, 2, 3], [4, 5, 6]]
-
-    print(cofactor(mat1))
-    print(cofactor(mat2))
-    print(cofactor(mat3))
-    print(cofactor(mat4))
-    try:
-        cofactor(mat5)
-    except Exception as e:
-        print(e)
-    try:
-        cofactor(mat6)
-    except Exception as e:
-        print(e)
+    mat = [[10, 4, 7, 3, -9],
+           [-2, 8, 3, -5, 6],
+           [5, 19, 6, 1, 25],
+           [7, -30, 21, 4, -1],
+           [8, 9, -10, 2, -3]]
+    print(cofactor(mat))
+    mat = [[5, 11, 6, 3, -20],
+           [1, -9, 13, 8, 5],
+           [2, 22, 4, 7, -6],
+           [-10, 3, 7, -1, 9],
+           [4, 8, -2, 10, 12]]
+    print(cofactor(mat))
