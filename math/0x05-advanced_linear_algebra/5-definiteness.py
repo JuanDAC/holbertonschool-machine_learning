@@ -32,7 +32,7 @@ def extract_property_eigenvalues(properties, value):
 
 
 def properties_eigenvalues(matrix):
-    """ 
+    """
     properties_eigenvalues(matrix) returns the
     properties of the eigenvalues
     """
