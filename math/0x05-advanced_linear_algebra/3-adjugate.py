@@ -108,7 +108,7 @@ def adjugate(matrix):
         return [[1]]
 
     if first_dimention == 2 and second_dimention == 2:
-        return [[matrix[1][1], -matrix[1][0]], [-matrix[0][1], matrix[0][0]]]
+        return [[matrix[1][1], -matrix[0][1]], [-matrix[1][0], matrix[0][0]]]
 
     return [
         [
