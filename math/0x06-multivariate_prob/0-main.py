@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 
-
 if __name__ == '__main__':
     import numpy as np
     mean_cov = __import__('0-mean_cov').mean_cov

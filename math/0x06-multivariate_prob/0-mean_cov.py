@@ -12,15 +12,17 @@ def mean_cov(X):
         [X]: numpy.ndarray of shape (n, d) containing the data set
 
     Validations:
-    - If the attrubute X is not a 2D numpy.ndarray, this function should raise 
+    - If the attrubute X is not a 2D numpy.ndarray, this function should raise
     a TypeError with the message "X must be a 2D numpy.ndarray"
 
-    - If n is less than 2, raise a ValueError with the message 
+    - If n is less than 2, raise a ValueError with the message
     "X must contain multiple data points"
 
     Returns:
-      - [mean] numpy.ndarray of shape (1, d) containing the mean of the data set
-      - [cov]  numpy.ndarray of shape (d, d) containing the covariance matrix of the data set 
+      - [mean]  numpy.ndarray of shape (1, d) containing the mean
+                of the data set
+      - [cov]   numpy.ndarray of shape (d, d) containing the
+                covariance matrix of the data set
     """
 
     if not isinstance(X, np.ndarray) or len(X.shape) != 2:
