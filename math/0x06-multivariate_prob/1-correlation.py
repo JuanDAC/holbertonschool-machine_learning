@@ -27,7 +27,7 @@ def correlation(C):
         raise ValueError("C must be a 2D square matrix")
 
     depends = np.diag(C)
-    depends_dimensions_increased = np.expand_dims(depends, axis=0)
+    depends_dimensions_increased = np.expand_dims(depends, axis=1)
     standard_x = np.sqrt(depends_dimensions_increased)
     standard_product = np.dot(standard_x.T, standard_x)
     correlation = C / standard_product
