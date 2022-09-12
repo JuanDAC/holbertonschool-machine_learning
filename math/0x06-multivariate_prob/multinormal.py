@@ -63,6 +63,6 @@ class MultiNormal:
         x_mean = x - self.mean
         cov_inv = np.linalg.inv(self.cov)
         cov_det = np.linalg.det(self.cov)
-        pdf = (1 / np.sqrt(((2 * np.pi) ** self.cov.shape[0]) * cov_det)) * np.exp(
-            -0.5 * np.matmul(np.matmul(x_mean.T, cov_inv), x_mean))
+        pdf = (1 / np.sqrt(((2 * np.pi) ** self.cov.shape[0]) * cov_det))\
+            * np.exp(-0.5 * np.matmul(np.matmul(x_mean.T, cov_inv), x_mean))
         return pdf[0][0]
