@@ -13,11 +13,11 @@ def Q_affinities(Y):
     - Y is a numpy.ndarray of shape (n, ndim) containing the low
       dimensional transformation of X
     - n is the number of points
-    - ndim is the new dimensional representation of X 
+    - ndim is the new dimensional representation of X
 
     Returns: Q, num
     - Q is a numpy.ndarray of shape (n, n) containing the Q affinities
-    - num is a numpy.ndarray of shape (n, n) containing the numerator 
+    - num is a numpy.ndarray of shape (n, n) containing the numerator
       of the Q affinities
 
     """
