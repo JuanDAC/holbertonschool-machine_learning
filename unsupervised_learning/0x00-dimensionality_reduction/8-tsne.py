@@ -19,20 +19,26 @@ def tsne(X, ndims=2, idims=50, perplexity=30.0, iterations=1000, lr=500):
     - perplexity is the perplexity
     - iterations is the number of iterations
     - lr is the learning rate
-    Every 100 iterations, not including 0, print Cost at iteration {iteration}: {cost}
-    {iteration} is the number of times Y has been updated and {cost} is the corresponding cost
+    Every 100 iterations, not including 0, print
+    Cost at iteration {iteration}: {cost}
+    {iteration} is the number of times Y has been updated
+    and {cost} is the corresponding cost
     After every iteration, Y should be re-centered by subtracting its mean
     Returns:
-    - Y, a numpy.ndarray of shape (n, ndim) containing the optimized low dimensional transformation of X
+    - Y, a numpy.ndarray of shape (n, ndim) containing the optimized
+      low dimensional transformation of X
     You should use:
     pca = __import__('1-pca').pca
     P_affinities = __import__('4-P_affinities').P_affinities
     grads = __import__('6-grads').grads
     cost = __import__('7-cost').cost
-    For the first 100 iterations, perform early exaggeration with an exaggeration of 4
+    For the first 100 iterations, perform early exaggeration with
+    an exaggeration of 4
     a(t) = 0.5 for the first 20 iterations and 0.8 thereafter
-    Hint 1: See Algorithm 1 on page 9 of t-SNE. But WATCH OUT! There is a mistake in the gradient descent step
-    Hint 2: See Section 3.4 starting on page 9 of t-SNE for early exaggeration
+    Hint 1: See Algorithm 1 on page 9 of t-SNE. But WATCH OUT!
+    There is a mistake in the gradient descent step
+    Hint 2: See Section 3.4 starting on page 9 of t-SNE
+    for early exaggeration
     """
     pca = __import__('1-pca').pca
     P_affinities = __import__('4-P_affinities').P_affinities
