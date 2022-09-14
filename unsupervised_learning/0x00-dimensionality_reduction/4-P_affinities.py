@@ -18,8 +18,10 @@ def P_affinities(X, tol=1e-5, perplexity=30.0):
       have
     - tol is the maximum tolerance allowed (inclusive) for the difference 
       in Shannon entropy from perplexity for all Gaussian distributions 
+
     Returns:
-    P, a numpy.ndarray of shape (n, n) containing the symmetric P affinities 
+    - P, a numpy.ndarray of shape (n, n) containing the symmetric P affinities 
+
     """
     P_init = __import__('2-P_init').P_init
     HP = __import__('3-entropy').HP
