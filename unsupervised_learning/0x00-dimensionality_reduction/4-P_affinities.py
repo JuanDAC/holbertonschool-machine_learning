@@ -16,7 +16,7 @@ def P_affinities(X, tol=1e-5, perplexity=30.0):
     - d is the number of dimensions in each point
     - perplexity is the perplexity that all Gaussian distributions should
       have
-    - tol is the maximum tolerance allowed (inclusive) for the difference 
+    - tol is the maximum tolerance allowed (inclusive) for the difference
       in Shannon entropy from perplexity for all Gaussian distributions 
 
     Returns:
