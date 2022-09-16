@@ -65,6 +65,7 @@ def BIC(X, kmin=1, kmax=None, iterations=1000, tol=1e-5, verbose=False):
     logl_val = []
     bic_val = []
     n, d = X.shape
+
     for k in range(kmin, kmax + 1):
         pi, m, S,  _, log_l = expectation_maximization(X, k, iterations, tol,
                                                        verbose)
