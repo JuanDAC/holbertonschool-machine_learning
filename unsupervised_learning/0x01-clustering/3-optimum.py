@@ -8,14 +8,19 @@ import numpy as np
 
 def optimum_k(X, kmin=1, kmax=None, iterations=1000):
     """
-    Arguments: 
+    Arguments:
     - X: numpy.ndarray of shape (n, d) containing the data set
-    - kmin: positive integer containing the minimum number of clusters to check for (inclusive)
-    - kmax: positive integer containing the maximum number of clusters to check for (inclusive)
-    - iterations: positive integer containing the maximum number of iterations for K-means
+    - kmin: positive integer containing the minimum number of
+            clusters to check for (inclusive)
+    - kmax: positive integer containing the maximum number of
+            clusters to check for (inclusive)
+    - iterations: positive integer containing the maximum number
+                  of iterations for K-means
     Returns:
-    - results: list containing the outputs of K-means for each cluster size
-    - d_vars: list containing the difference in variance from the smallest cluster size for each cluster size
+    - results: list containing the outputs of K-means for each
+               cluster size
+    - d_vars: list containing the difference in variance from
+              the smallest cluster size for each cluster size
     """
     if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None, None

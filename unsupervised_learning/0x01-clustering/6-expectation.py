@@ -8,13 +8,17 @@ import numpy as np
 
 def expectation(X, pi, m, S):
     """
-    Arguments: 
+    Arguments:
     - X: numpy.ndarray of shape (n, d) containing the data set
-    - pi: numpy.ndarray of shape (k,) containing the priors for each cluster
-    - m: numpy.ndarray of shape (k, d) containing the centroid means for each cluster
-    - S: numpy.ndarray of shape (k, d, d) containing the covariance matrices for each cluster
+    - pi: numpy.ndarray of shape (k,) containing the priors
+          for each cluster
+    - m: numpy.ndarray of shape (k, d) containing the centroid
+         means for each cluster
+    - S: numpy.ndarray of shape (k, d, d) containing the covariance
+         matrices for each cluster
     Returns:
-    - g: numpy.ndarray of shape (k, n) containing the posterior probabilities for each data point in each cluster
+    - g: numpy.ndarray of shape (k, n) containing the posterior
+         probabilities for each data point in each cluster
     - l: total log likelihood
     """
     if not isinstance(X, np.ndarray) or len(X.shape) != 2:
@@ -49,6 +53,6 @@ def expectation(X, pi, m, S):
 
     # Calculate the total log likelihood
     # You may use at most 1 loop
-    l = np.sum(np.log(np.sum(pi * pdf(X, m, S), axis=0)))
+    l_ = np.sum(np.log(np.sum(pi * pdf(X, m, S), axis=0)))
 
-    return g, l
+    return g, l_

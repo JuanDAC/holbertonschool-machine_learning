@@ -8,9 +8,10 @@ import numpy as np
 
 def variance(X, C):
     """
-    Arguments: 
+    Arguments:
     - X: numpy.ndarray of shape (n, d) containing the data set
-    - C: numpy.ndarray of shape (k, d) containing the centroid means for each cluster
+    - C: numpy.ndarray of shape (k, d) containing the centroid
+         means for each cluster
     Returns:
     - var: total variance
     """

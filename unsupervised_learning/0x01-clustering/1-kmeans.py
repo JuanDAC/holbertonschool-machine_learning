@@ -8,13 +8,16 @@ import numpy as np
 
 def kmeans(X, k, iterations=1000):
     """
-    Arguments: 
+    Arguments:
     - X: numpy.ndarray of shape (n, d) containing the dataset
     - k: positive integer containing the number of clusters
-    - iterations: positive integer containing the maximum number of iterations that should be performed
+    - iterations: positive integer containing the maximum number
+      of iterations that should be performed
     Returns:
-    - C: numpy.ndarray of shape (k, d) containing the centroid means for each cluster
-    - clss: numpy.ndarray of shape (n,) containing the index of the cluster in C that each data point belongs to
+    - C: numpy.ndarray of shape (k, d) containing the centroid
+         means for each cluster
+    - clss: numpy.ndarray of shape (n,) containing the index of
+            the cluster in C that each data point belongs to
     """
     if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None, None
@@ -27,13 +30,15 @@ def kmeans(X, k, iterations=1000):
 
     n, d = X.shape
 
-    # Initialize the cluster centroids using a multivariate uniform distribution (based on0-initialize.py)
+    # Initialize the cluster centroids using a multivariate uniform
+    # distribution (based on0-initialize.py)
     min = np.amin(X, axis=0)
     max = np.amax(X, axis=0)
 
     C = np.random.uniform(min, max, size=(k, d))
 
-    # If a cluster contains no data points during the update step, reinitialize its centroid
+    # If a cluster contains no data points during the update step,
+    # reinitialize its centroid
     # You should use numpy.random.uniform exactly twice
     # You may use at most 2 loops
     for i in range(iterations):
@@ -46,7 +51,8 @@ def kmeans(X, k, iterations=1000):
         clss = np.argmin(dist, axis=1)
 
         # Update the centroid of each cluster
-        # If a cluster contains no data points during the update step, reinitialize its centroid
+        # If a cluster contains no data points during the update step,
+        # reinitialize its centroid
         # You should use numpy.random.uniform exactly twice
         # You may use at most 2 loops
         for j in range(k):

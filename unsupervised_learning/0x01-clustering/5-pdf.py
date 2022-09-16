@@ -8,12 +8,16 @@ import numpy as np
 
 def pdf(X, m, S):
     """
-    Arguments: 
-    - X: numpy.ndarray of shape (n, d) containing the data points whose PDF should be evaluated
-    - m: numpy.ndarray of shape (d,) containing the mean of the distribution
-    - S: numpy.ndarray of shape (d, d) containing the covariance of the distribution
+    Arguments:
+    - X: numpy.ndarray of shape (n, d) containing the
+         data points whose PDF should be evaluated
+    - m: numpy.ndarray of shape (d,) containing the
+         mean of the distribution
+    - S: numpy.ndarray of shape (d, d) containing the
+         covariance of the distribution
     Returns:
-    - P: numpy.ndarray of shape (n,) containing the PDF values for each data point
+    - P: numpy.ndarray of shape (n,) containing the PDF
+         values for each data point
     """
     if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None

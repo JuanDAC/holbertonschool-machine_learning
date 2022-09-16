@@ -8,7 +8,7 @@ import numpy as np
 
 def initialize(X, k):
     """
-    Arguments: 
+    Arguments:
     - X: numpy.ndarray of shape (n, d) containing the dataset
          that will be used for K-means clustering
     - k: positive integer containing the number of clusters

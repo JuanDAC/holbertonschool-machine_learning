@@ -9,15 +9,17 @@ import sklearn.mixture
 
 def gmm(X, k):
     """
-    Arguments: 
+    Arguments:
     - X: numpy.ndarray of shape (n, d) containing the dataset
     - k: number of clusters
     Returns:
     - pi: numpy.ndarray of shape (k,) containing the cluster priors
     - m: numpy.ndarray of shape (k, d) containing the centroid means
     - S: numpy.ndarray of shape (k, d, d) containing the covariance matrices
-    - clss: numpy.ndarray of shape (n,) containing the cluster indices for each data point
-    - bic: numpy.ndarray of shape (kmax - kmin + 1) containing the BIC value for each cluster size tested
+    - clss: numpy.ndarray of shape (n,) containing the cluster indices
+            for each data point
+    - bic: numpy.ndarray of shape (kmax - kmin + 1) containing the BIC
+           value for each cluster size tested
     """
     if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None, None, None, None, None

@@ -10,11 +10,12 @@ import matplotlib.pyplot as plt
 
 def agglomerative(X, dist):
     """
-    Arguments: 
+    Arguments:
     - X: numpy.ndarray of shape (n, d) containing the dataset
     - dist: the maximum cophenetic distance for all clusters
     Returns:
-    - clss: numpy.ndarray of shape (n,) containing the cluster indices for each data point
+    - clss: numpy.ndarray of shape (n,) containing the cluster
+            indices for each data point
     """
     if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None

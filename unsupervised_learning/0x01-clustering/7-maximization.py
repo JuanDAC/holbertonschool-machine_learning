@@ -8,13 +8,17 @@ import numpy as np
 
 def maximization(X, g):
     """
-    Arguments: 
+    Arguments:
     - X: numpy.ndarray of shape (n, d) containing the data set
-    - g: numpy.ndarray of shape (k, n) containing the posterior probabilities for each data point in each cluster
+    - g: numpy.ndarray of shape (k, n) containing the posterior
+         probabilities for each data point in each cluster
     Returns:
-    - pi: numpy.ndarray of shape (k,) containing the updated priors for each cluster
-    - m: numpy.ndarray of shape (k, d) containing the updated centroid means for each cluster
-    - S: numpy.ndarray of shape (k, d, d) containing the updated covariance matrices for each cluster
+    - pi: numpy.ndarray of shape (k,) containing the updated
+          priors for each cluster
+    - m: numpy.ndarray of shape (k, d) containing the updated
+         centroid means for each cluster
+    - S: numpy.ndarray of shape (k, d, d) containing the updated
+         covariance matrices for each cluster
     """
     if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None, None, None
