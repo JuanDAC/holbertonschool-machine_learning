@@ -20,7 +20,7 @@ def gmm(X, k):
     - bic: numpy.ndarray of shape (kmax - kmin + 1) containing the BIC
            value for each cluster size tested
     """
-    if not isinstance(X, np.ndarray) or len(X.shape) != 2:
+    if len(X.shape) != 2:
         return None, None, None, None, None
 
     if type(k) != int or k <= 0:
