@@ -21,17 +21,15 @@ def gmm(X, k):
     - bic: numpy.ndarray of shape (kmax - kmin + 1) containing the BIC
            value for each cluster size tested
     """
-    if not isinstance(X, np.ndarray) or len(X.shape) != 2:
-        return None, None, None, None, None
 
-    if type(k) != int or k <= 0:
-        return None, None, None, None, None
+    gm = sklearn.mixture.GaussianMixture(n_components=k)
+    gm.fit(X)
 
-    gmm = sklearn.mixture.GaussianMixture(n_components=k).fit(X)
-    pi = gmm.weights_
-    m = gmm.means_
-    S = gmm.covariances_
-    clss = gmm.predict(X)
-    bic = gmm.bic(X)
+    pi = gm.weights_
+    m = gm.means_
+    S = gm.covariances_
+
+    clss = gm.predict(X)
+    bic = gm.bic(X)
 
     return pi, m, S, clss, bic
