@@ -72,7 +72,6 @@ def BIC(X, kmin=1, kmax=None, iterations=1000, tol=1e-5, verbose=False):
         best_result.append((pi, m, S))
         logl_val.append(log_l)
 
-        # Formula p :https://bit.ly/33Cw8lH
         cov_params = d * (d + 1) / 2.
         mean_params = d
         p = int((k * cov_params) + (k * mean_params) + k - 1)
