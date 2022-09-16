@@ -26,11 +26,14 @@ def gmm(X, k):
     if type(k) != int or k <= 0:
         return None, None, None, None, None
 
-    gmm = sklearn.mixture.GaussianMixture(n_components=k).fit(X)
-    pi = gmm.weights_
-    m = gmm.means_
-    S = gmm.covariances_
-    clss = gmm.predict(X)
-    bic = gmm.bic(X)
+    gm = sklearn.mixture.GaussianMixture(n_components=k)
+    gm.fit(X)
+
+    pi = gm.weights_
+    m = gm.means_
+    S = gm.covariances_
+
+    clss = gm.predict(X)
+    bic = gm.bic(X)
 
     return pi, m, S, clss, bic
