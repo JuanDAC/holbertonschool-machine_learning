@@ -61,4 +61,5 @@ def kmeans(X, k, iterations=1000):
             else:
                 C[j] = np.mean(X[clss == j], axis=0)
 
+
     return C, clss
