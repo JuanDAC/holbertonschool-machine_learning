@@ -48,7 +48,6 @@ def clipping(references, sentence):
         list_references.append(
             ((abs(len_reference - len_sentence)), len_reference))
 
-    # Precision
     reference_len = sorted(list_references, key=lambda x: x[0])
     reference_len = reference_len[0][1]
 
