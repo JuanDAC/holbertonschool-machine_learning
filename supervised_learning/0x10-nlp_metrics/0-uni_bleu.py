@@ -3,8 +3,6 @@
 File that calculates the unigram BLEU score for a sentence
 """
 
-import numpy as np
-
 
 def uni_bleu(references, sentence):
     """
@@ -16,8 +14,8 @@ def uni_bleu(references, sentence):
         * each word in the sentence should be considered as a possible match
     Returns:
       - the unigram BLEU score
-    ```
     """
+    import numpy as np
     sentence_length = len(sentence)
     references_length = []
     words = {}
