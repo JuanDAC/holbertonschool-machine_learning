@@ -3,6 +3,57 @@
 File that calculates the unigram BLEU score for a sentence
 """
 
+import numpy as np
+
+
+def count_appearances(references, sentence):
+    """
+    Function that counts the appearances of each word in the sentence
+    Args:
+      -  references: list of reference translations
+      -  sentence: list containing the model proposed sentence
+    Returns:
+      - count of each word of references in the sentence
+    """
+
+    sen = list(set(sentence))
+    count_dict = {}
+
+    for reference in references:
+        for word in reference:
+            if word in sen and word not in count_dict.keys():
+                count_dict[word] = reference.count(word)
+                continue
+            if word in sen:
+                new = reference.count(word)
+                old = count_dict[word]
+                count_dict[word] = max(new, old)
+
+    return count_dict.values()
+
+
+def clipping(references, sentence):
+    """
+    Function that calculates the clipping
+    Arguments:
+      - reference: length of the reference
+      - sentence: length of the sentence
+    Returns:
+      - clipped count of each word of references in the sentence
+    """
+    len_sentence = len(sentence)
+    list_references = []
+    for reference in references:
+        len_reference = len(reference)
+        list_references.append(
+            ((abs(len_reference - len_sentence)), len_reference))
+
+    # Precision
+    reference_len = sorted(list_references, key=lambda x: x[0])
+    reference_len = reference_len[0][1]
+
+    return reference_len, len_sentence
+
 
 def uni_bleu(references, sentence):
     """
@@ -15,33 +66,15 @@ def uni_bleu(references, sentence):
     Returns:
       - the unigram BLEU score
     """
-    import numpy as np
-    sentence_length = len(sentence)
-    references_length = []
-    words = {}
-    for reference in references:
-        references_length.append(len(reference))
-        for word in reference:
-            if word not in words:
-                words[word] = 1
+    count_values = count_appearances(references, sentence)
+    reference_clipping, len_sentence = clipping(references, sentence)
 
-    for word in sentence:
-        if word in words:
-            words[word] += 1
-
-    words = np.array(list(words.values()))
-    words = np.where(words > 1, 1, 0)
-    words = np.sum(words)
-    best_match = np.argmin(
-        np.abs(np.array(references_length) - sentence_length))
-    best_match = references[best_match]
-    overlap = 0
-    for word in sentence:
-        if word in best_match:
-            overlap += 1
-    bleu_score = np.exp(np.log(overlap / sentence_length))
-    if sentence_length > len(best_match):
+    if len_sentence > reference_clipping:
         bp = 1
-    else:
-        bp = np.exp(1 - (float(len(best_match)) / float((sentence_length))))
-    return (bp * bleu_score) * overlap
+
+    if len_sentence <= reference_clipping:
+        bp = np.exp(1 - (float(reference_clipping) / len_sentence))
+
+    bleu_score = bp * np.exp(np.log(sum(count_values)) / len_sentence)
+
+    return bleu_score
