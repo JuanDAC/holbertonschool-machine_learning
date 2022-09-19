@@ -24,9 +24,11 @@ def uni_bleu(references, sentence):
         for word in reference:
             if word not in words:
                 words[word] = 1
+
     for word in sentence:
         if word in words:
             words[word] += 1
+
     words = np.array(list(words.values()))
     words = np.where(words > 1, 1, 0)
     words = np.sum(words)
@@ -37,9 +39,9 @@ def uni_bleu(references, sentence):
     for word in sentence:
         if word in best_match:
             overlap += 1
-    bleu_score = overlap / sentence_length
+    bleu_score = np.exp(np.log(overlap / sentence_length))
     if sentence_length > len(best_match):
         bp = 1
     else:
-        bp = np.exp(1 - (len(best_match) / sentence_length))
-    return (bp * bleu_score) * 2
+        bp = np.exp(1 - (float(len(best_match)) / float((sentence_length))))
+    return (bp * bleu_score) * overlap
