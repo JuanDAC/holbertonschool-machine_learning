@@ -49,9 +49,8 @@ def clipping(references, sentence):
             ((abs(len_reference - len_sentence)), len_reference))
 
     reference_len = sorted(list_references, key=lambda x: x[0])
-    reference_len = reference_len[0][1]
 
-    return reference_len, len_sentence
+    return reference_len[0][1]
 
 
 def uni_bleu(references, sentence):
@@ -67,6 +66,8 @@ def uni_bleu(references, sentence):
     """
     count_values = count_appearances(references, sentence)
     reference_clipping, len_sentence = clipping(references, sentence)
+
+    len_sentence = len(sentence)
 
     if len_sentence > reference_clipping:
         bp = 1
