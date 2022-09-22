@@ -46,3 +46,30 @@ class RNNEncoder(tf.keras.layers.Layer):
             return_state=True,
             recurrent_initializer='glorot_uniform'
         )
+
+    def initialize_hidden_state(self):
+        """
+        Function thats initializes the hidden states for the RNN
+        cell to a tensor of zeros
+        Returns: 
+         - A tensor of shape (batch, units)containing the
+           initialized hidden states
+
+        """
+        return tf.keras.initializers.Zeros()(shape=(self.batch, self.units))
+
+    def call(self, x, initial):
+        """
+        Function that builds the encoder
+        Arguments:
+         - x is a tensor of shape (batch, input_seq_len)
+           containing the input to the encoder layer as word
+           indices within the vocabulary
+         - initial is a tensor of shape (batch, units) containing
+           the initial hidden state
+        Returns:
+            - outputs, hidden 
+        """
+        x = self.embedding(x)
+        outputs, hidden = self.gru(x, initial_state=initial)
+        return outputs, hidden
