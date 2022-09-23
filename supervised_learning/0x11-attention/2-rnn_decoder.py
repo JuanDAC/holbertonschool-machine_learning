@@ -16,14 +16,18 @@ class RNNDecoder(tf.keras.layers.Layer):
 
     def __init__(self, vocab, embedding, units, batch):
         """
-        Function that initializes the hidden states for the RNN cell to a tensor of zeros
+        Function that initializes the hidden states for the RNN cell to a
+        tensor of zeros
         Arguments:
           - vocab is an integer representing the size of the input vocabulary
-          - embedding is an integer representing the dimensionality of the embedding vector
-          - units is an integer representing the number of hidden units in the RNN cell
+          - embedding is an integer representing the dimensionality of the
+            embedding vector
+          - units is an integer representing the number of hidden units in
+            the RNN cell
           - batch is an integer representing the batch size
         Returns:
-          - A tensor of shape (batch, units) containing the initialized hidden states 
+          - A tensor of shape (batch, units) containing the initialized
+            hidden states
         """
         super(RNNDecoder, self).__init__()
         self.batch = batch

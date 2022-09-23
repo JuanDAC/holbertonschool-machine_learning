@@ -26,7 +26,8 @@ class MultiHeadAttention(tf.keras.layers.Layer):
           - Wq: a Dense layer with dm units, used to generate the query matrix
           - Wk: a Dense layer with dm units, used to generate the key matrix
           - Wv: a Dense layer with dm units, used to generate the value matrix
-          - linear: a Dense layer with dm units, used to generate the attention output
+          - linear: a Dense layer with dm units, used to generate the
+            attention output
         """
         super(MultiHeadAttention, self).__init__()
         self.h = h
@@ -39,13 +40,17 @@ class MultiHeadAttention(tf.keras.layers.Layer):
 
     def call(self, Q, K, V, mask):
         """
-        Method that splits the heads of shape (batch, seq_len_q, dm) into multiple heads of shape (batch, seq_len_q, h, depth)
+        Method that splits the heads of shape (batch, seq_len_q, dm) into
+        multiple heads of shape (batch, seq_len_q, h, depth)
         Arguments:
-          - Q is a tensor of shape (batch, seq_len_q, dk) containing the input to generate the query matrix
-          - K is a tensor of shape (batch, seq_len_v, dk) containing the input to generate the key matrix
-          - V is a tensor of shape (batch, seq_len_v, dv) containing the input to generate the value matrix
+          - Q is a tensor of shape (batch, seq_len_q, dk) containing the
+            input to generate the query matrix
+          - K is a tensor of shape (batch, seq_len_v, dk) containing the
+            input to generate the key matrix
+          - V is a tensor of shape (batch, seq_len_v, dv) containing the
+            input to generate the value matrix
           - mask is always None
-        Returns: 
+        Returns:
           - output, weights
         """
         batch_size = tf.shape(Q)[0]

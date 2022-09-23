@@ -36,7 +36,8 @@ class Decoder(tf.keras.layers.Layer):
         - positional_encoding - a numpy.ndarray of shape (max_seq_len, dm)
           containing the positional encodings
         - blocks - a list of length N containing all of the EncoderBlock‘s
-        - dropout - the dropout layer, to be applied to the positional encodings
+        - dropout - the dropout layer, to be applied to the positional
+          encodings
         """
         super(Decoder, self).__init__()
         self.N = N
