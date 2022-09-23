@@ -3,7 +3,6 @@
 File contains RNNDecoder Class
 """
 
-import numpy as np
 import tensorflow as tf
 
 
