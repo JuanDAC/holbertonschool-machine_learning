@@ -38,6 +38,18 @@ class MultiHeadAttention(tf.keras.layers.Layer):
         self.Wv = tf.keras.layers.Dense(dm)
         self.linear = tf.keras.layers.Dense(dm)
 
+    def split_heads(self, x, batch_size):
+        """
+        Method that splits the last dimension of x into (h, depth)
+        Arguments:
+          - x is a tensor with shape (batch_size, seq_len, dm) containing
+          - batch_size is an integer representing the batch size
+        Returns:
+          - a tensor with shape (batch_size, h, seq_len, depth)
+        """
+        x = tf.reshape(x, (batch_size, -1, self.h, self.depth))
+        return tf.transpose(x, perm=[0, 2, 1, 3])
+
     def call(self, Q, K, V, mask):
         """
         Method that splits the heads of shape (batch, seq_len_q, dm) into
