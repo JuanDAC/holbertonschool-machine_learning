@@ -2,8 +2,8 @@
 """
 6 Expectation
 """
-
 import numpy as np
+pdf = __import__('5-pdf').pdf
 
 
 def expectation(X, pi, m, S):
@@ -38,8 +38,6 @@ def expectation(X, pi, m, S):
 
     n, _ = X.shape
     k = pi.shape[0]
-
-    pdf = __import__('5-pdf').pdf
 
     # Calculate the posterior probabilities for each data point in each cluster
     # You should use pdf = __import__('5-pdf').pdf
