@@ -39,14 +39,14 @@ class Decoder(tf.keras.layers.Layer):
         - dropout - the dropout layer, to be applied to the positional
           encodings
         """
-        super(Decoder, self).__init__()
         self.N = N
         self.dm = dm
         self.embedding = tf.keras.layers.Embedding(target_vocab, dm)
         self.positional_encoding = positional_encoding(max_seq_len, dm)
         self.blocks = [DecoderBlock(dm, h, hidden, drop_rate)
                        for _ in range(N)]
-        self.dropout = tf.keras.layers.Dropout(drop_rate)
+        self.dropout = tf.keras.layers.dropout(drop_rate)
+        super(Decoder, self).__init__()
 
     def call(self, x, encoder_output, training, look_ahead_mask, padding_mask):
         """
@@ -61,14 +61,11 @@ class Decoder(tf.keras.layers.Layer):
             the encoder output
         """
         seq_len = x.shape[1]
-        attention_weights = {}
         x = self.embedding(x)
         x *= tf.math.sqrt(tf.cast(self.dm, tf.float32))
         x += self.positional_encoding[:seq_len]
         x = self.dropout(x, training=training)
         for i in range(self.N):
-            x, block1, block2 = self.blocks[i](x, encoder_output, training,
-                                               look_ahead_mask, padding_mask)
-            attention_weights['decoder_layer{}_block1'.format(i + 1)] = block1
-            attention_weights['decoder_layer{}_block2'.format(i + 1)] = block2
-        return x, attention_weights
+            x = self.blocks[i](x, encoder_output, training,
+                               look_ahead_mask, padding_mask)
+        return x
