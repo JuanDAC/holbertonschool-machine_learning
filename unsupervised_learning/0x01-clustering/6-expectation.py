@@ -2,6 +2,7 @@
 """
 6 Expectation
 """
+import numpy as np
 
 
 def expectation(X, pi, m, S):
@@ -19,7 +20,6 @@ def expectation(X, pi, m, S):
          probabilities for each data point in each cluster
     - l: total log likelihood
     """
-    import numpy as np
     if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None, None
 
