@@ -7,13 +7,15 @@ import numpy as np
 
 def regular(P):
     """
-    Function that determines the steady state probabilities of a regular markov chain
+    Function that determines the steady state
+    probabilities of a regular markov chain
     Arguments:
         - P is a square 2D numpy.ndarray of shape (n, n) representing the
             * i is the probability of transitioning from state i to state j
             * j is the probability of transitioning from state j to state i
     Returns:
-        - a numpy.ndarray of shape (1, n) containing the steady state probabilities, or None on failure
+        - a numpy.ndarray of shape (1, n) containing the
+            steady state probabilities, or None on failure
     """
 
     try:
