@@ -60,7 +60,8 @@ def viterbi(Observation, Emission, Transition, Initial):
                 V[n, t] = np.max(V[:, t - 1] * Transition[:, n]
                                  * Emission[n, Observation[t]])
                 B[n, t] = np.argmax(
-                    V[:, t - 1] * Transition[:, n] * Emission[n, Observation[t]])
+                    V[:, t - 1] * Transition[:, n]
+                    * Emission[n, Observation[t]])
 
         path = [np.argmax(V[:, T - 1])]
         for i in range(T - 1, 0, -1):
