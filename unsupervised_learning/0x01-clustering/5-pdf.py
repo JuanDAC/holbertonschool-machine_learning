@@ -34,13 +34,9 @@ def pdf(X, m, S):
     if S.shape[0] != S.shape[1]:
         return None
 
-    n, d = X.shape
-    _, d1 = m.shape
-    d2, _ = S.shape
+    _, d = X.shape
 
-    if d != d1 or d != d2:
-        return None
-
+    pi = (2 * np.pi) ** (d/2)
     sigma_1 = np.linalg.det(S) ** (1/2)
 
     sigma_2 = np.linalg.inv(S)
