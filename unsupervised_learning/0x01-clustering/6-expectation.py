@@ -3,7 +3,6 @@
 6 Expectation
 """
 import numpy as np
-pdf = __import__('5-pdf').pdf
 
 
 def expectation(X, pi, m, S):
@@ -36,6 +35,8 @@ def expectation(X, pi, m, S):
     if not np.isclose([np.sum(pi)], [1])[0]:
         return None, None
 
+    pdf = __import__('5-pdf').pdf
+
     n, _ = X.shape
     k = pi.shape[0]
 
@@ -44,15 +45,18 @@ def expectation(X, pi, m, S):
     # You may use at most 1 loop
     g = np.zeros((k, n))
 
+    denominator = 0
     for i in range(k):
-        g[i] = pi[i] * pdf(X, m[i], S[i])
+        numerator = pdf(X, m[i], S[i]) * pi[i]
+        g[i] = numerator
+        denominator += numerator
 
     # Normalize the posterior probabilities
     # You may use at most 1 loop
-    g = g / np.sum(g, axis=0)
+    g = g / denominator
 
     # Calculate the total log likelihood
     # You may use at most 1 loop
-    log = np.sum(np.log(np.sum(pi * pdf(X, m, S), axis=0)))
+    log = np.sum(np.log(np.sum(g, axis=0)))
 
     return g, log
