@@ -14,7 +14,7 @@ def absorbing(P):
             * P[i, j] is the probability of transitioning from
               state i to state j.
             * n is the number of states in the markov chain
-    Returns: 
+    Returns:
         - True if it is absorbing, or False on failure
     """
 
