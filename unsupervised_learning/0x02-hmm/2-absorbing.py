@@ -9,8 +9,10 @@ def absorbing(P):
     """
     Function that determines if a markov chain is absorbing:
     Argumrnts:
-        - P is a is a square 2D numpy.ndarray of shape (n, n) representing the standard transition matrix
-            * P[i, j] is the probability of transitioning from state i to state j
+        - P is a is a square 2D numpy.ndarray of shape (n, n)
+            representing the standard transition matrix
+            * P[i, j] is the probability of transitioning from
+              state i to state j.
             * n is the number of states in the markov chain
     Returns: 
         - True if it is absorbing, or False on failure
@@ -35,6 +37,7 @@ def absorbing(P):
         return True
 
     absorb = (diagonal == 1)
+
     for row in range(len(diagonal)):
         for col in range(len(diagonal)):
             if P[row, col] > 0 and absorb[col]:
