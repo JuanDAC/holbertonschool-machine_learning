@@ -63,10 +63,6 @@ def kmeans(X, k, iterations=1000):
             else:
                 C[j] = np.mean(X[clss == j], axis=0)
 
-        c_ext = C[:, np.newaxis]
-        dist = np.sqrt(((X - c_ext) ** 2).sum(axis=2))
-        clss = np.argmin(dist, axis=0)
-
         if (initial_c == C).all():
             break
 
