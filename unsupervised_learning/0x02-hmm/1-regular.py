@@ -23,16 +23,19 @@ def regular(P):
         if P.shape[0] != P.shape[1]:
             return None
 
+        if len(P.shape) != 2:
+            return None
+
         if np.any(P < 0):
             return None
 
         if np.any(np.sum(P, axis=1) != 1):
             return None
 
-        n = P.shape[0]
         _, evecs = np.linalg.eig(P.T)
         state = evecs / np.sum(evecs, axis=0)
 
+        n = P.shape[0]
         for i in np.dot(state.T, P):
             if (i >= 0).all() and np.isclose(i.sum(), 1):
                 return i.reshape(1, n)
