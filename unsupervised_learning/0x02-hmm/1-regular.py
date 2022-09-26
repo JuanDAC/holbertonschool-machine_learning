@@ -21,10 +21,7 @@ def regular(P):
         return None
     if np.sum(P, axis=1).all() != 1:
         return None
-    n = P.shape[0]
-    if n == 1:
-        return np.array([[1]])
-    A = np.hstack((P.T - np.eye(n), np.ones((n, 1))))
-    b = np.zeros((n, 1))
-    b[-1] = 1
-    return np.linalg.solve(A, b)
+    try:
+        return np.linalg.solve(np.eye(P.shape[0]) - P.T, np.ones(P.shape[0]))
+    except Exception:
+        return None
