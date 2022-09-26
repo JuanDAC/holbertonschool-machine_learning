@@ -15,11 +15,13 @@ def regular(P):
     Returns:
         - a numpy.ndarray of shape (1, n) containing the steady state probabilities, or None on failure
     """
-    if not isinstance(P, np.ndarray) or len(P.shape) != 2:
+    if type(P) is not np.ndarray or len(P.shape) != 2:
         return None
     if P.shape[0] != P.shape[1]:
         return None
-    if np.sum(P, axis=1).all() != 1:
+    if np.any(P < 0):
+        return None
+    if np.any(np.sum(P, axis=1) != 1):
         return None
     try:
         return np.linalg.solve(np.eye(P.shape[0]) - P.T, np.ones(P.shape[0]))
