@@ -45,7 +45,7 @@ class Decoder(tf.keras.layers.Layer):
         self.positional_encoding = positional_encoding(max_seq_len, dm)
         self.blocks = [DecoderBlock(dm, h, hidden, drop_rate)
                        for _ in range(N)]
-        self.dropout = tf.keras.layers.dropout(drop_rate)
+        self.dropout = tf.keras.layers.Dropout(drop_rate)
         super(Decoder, self).__init__()
 
     def call(self, x, encoder_output, training, look_ahead_mask, padding_mask):
