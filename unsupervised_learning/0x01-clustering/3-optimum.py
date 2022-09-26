@@ -37,6 +37,9 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
     if type(iterations) != int or iterations <= 0:
         return None, None
 
+    if not isinstance(kmin, int) or kmin < 1 or kmin >= X.shape[0]:
+        return None, None
+
     kmeans = __import__('1-kmeans').kmeans
     variance = __import__('2-variance').variance
 
@@ -49,7 +52,9 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
         results.append((C, clss))
         d_vars.append(var)
 
-    d_vars = np.array(d_vars)
-    d_vars = d_vars - d_vars[0]
+    d_var = [0]
+    for i in range(kmax - 1):
+        derivate = d_vars[i] - d_vars[i + 1]
+        d_var.append(derivate + d_var[i])
 
-    return results, d_vars
+    return results, d_var
