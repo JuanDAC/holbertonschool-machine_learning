@@ -18,32 +18,35 @@ def absorbing(P):
         - True if it is absorbing, or False on failure
     """
 
-    if type(P) is not np.ndarray:
-        return False
-
-    if len(P.shape) != 2:
-        return False
-
-    if P.shape[0] != P.shape[1]:
-        return False
-
-    for elem in np.sum(P, axis=1):
-        if not np.isclose(elem, 1):
+    try:
+        if type(P) is not np.ndarray:
             return False
 
-    diagonal = np.diag(P)
+        if len(P.shape) != 2:
+            return False
 
-    if (diagonal == 1).all():
-        return True
+        if P.shape[0] != P.shape[1]:
+            return False
 
-    absorb = (diagonal == 1)
+        for elem in np.sum(P, axis=1):
+            if not np.isclose(elem, 1):
+                return False
 
-    for row in range(len(diagonal)):
-        for col in range(len(diagonal)):
-            if P[row, col] > 0 and absorb[col]:
-                absorb[row] = 1
+        diagonal = np.diag(P)
 
-    if (absorb == 1).all():
-        return True
+        if (diagonal == 1).all():
+            return True
 
-    return False
+        absorb = (diagonal == 1)
+
+        for row in range(len(diagonal)):
+            for col in range(len(diagonal)):
+                if P[row, col] > 0 and absorb[col]:
+                    absorb[row] = 1
+
+        if (absorb == 1).all():
+            return True
+
+        return False
+    except Exception:
+        return False
