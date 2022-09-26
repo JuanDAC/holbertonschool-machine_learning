@@ -8,6 +8,10 @@ MultiHeadAttention = __import__('6-multihead_attention').MultiHeadAttention
 
 
 class DecoderBlock(tf.keras.layers.Layer):
+    """
+    DecoderBlock class to create an encoder block for a transformer
+    """
+
     def __init__(self, dm, h, hidden, drop_rate=0.1):
         """
         Constructor that creates a decoder block for a transformer
@@ -66,7 +70,8 @@ class DecoderBlock(tf.keras.layers.Layer):
         mha1 = self.dropout1(mha1, training=training)
         out1 = self.layernorm1(mha1 + x)
         # 2nd MultiHeadAttention
-        mha2, _ = self.mha2(out1, encoder_output, encoder_output, padding_mask)
+        mha2, _ = self.mha2(out1, encoder_output,
+                            encoder_output, padding_mask)
         mha2 = self.dropout2(mha2, training=training)
         out2 = self.layernorm2(mha2 + out1)
         # Dense hidden
