@@ -22,8 +22,8 @@ def variance(X, C):
     if not isinstance(C, np.ndarray) or len(C.shape) != 2:
         return None
 
-    n, d = X.shape
-    k, d = C.shape
+    if C.shape[1] != X.shape[1]:
+        return None
 
     centroids = C[:, np.newaxis]
     distances = np.sqrt(((X - centroids)**2).sum(axis=2))
