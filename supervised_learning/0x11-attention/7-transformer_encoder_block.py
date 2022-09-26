@@ -2,9 +2,8 @@
 """
 File: 7-transformer_encoder_block.py
 """
-
 import tensorflow as tf
-MultiHeadAttention = __import__('6-multi_head_attention').MultiHeadAttention
+MultiHeadAttention = __import__('6-multihead_attention').MultiHeadAttention
 
 
 class EncoderBlock(tf.keras.layers.Layer):
@@ -32,7 +31,6 @@ class EncoderBlock(tf.keras.layers.Layer):
           - dropout1: the first dropout layer
           - dropout2: the second dropout layer
         """
-        super(EncoderBlock, self).__init__()
         self.mha = MultiHeadAttention(dm, h)
         self.dense_hidden = tf.keras.layers.Dense(hidden, activation='relu')
         self.dense_output = tf.keras.layers.Dense(dm)
@@ -40,6 +38,7 @@ class EncoderBlock(tf.keras.layers.Layer):
         self.layernorm2 = tf.keras.layers.LayerNormalization(epsilon=1e-6)
         self.dropout1 = tf.keras.layers.Dropout(drop_rate)
         self.dropout2 = tf.keras.layers.Dropout(drop_rate)
+        super(EncoderBlock, self).__init__()
 
     def call(self, x, training, mask=None):
         """
