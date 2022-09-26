@@ -28,7 +28,7 @@ def kmeans(X, k, iterations=1000):
     if type(iterations) != int or iterations <= 0:
         return None, None
 
-    n, d = X.shape
+    _, d = X.shape
 
     # Initialize the cluster centroids using a multivariate uniform
     # distribution (based on0-initialize.py)
@@ -41,11 +41,14 @@ def kmeans(X, k, iterations=1000):
     # reinitialize its centroid
     # You should use numpy.random.uniform exactly twice
     # You may use at most 2 loops
-    for i in range(iterations):
+    for _ in range(iterations):
         # Calculate the distance between each data point and each centroid
         # You should use numpy.linalg.norm exactly twice
         # You may use at most 2 loops
-        dist = np.linalg.norm(X[:, np.newaxis] - C, axis=-1)
+
+        initial_c = np.copy(C)
+        c_ext = C[:, np.newaxis]
+        dist = np.sqrt(((X - c_ext) ** 2).sum(axis=2))
 
         # Assign each data point to the nearest cluster centroid
         clss = np.argmin(dist, axis=1)
@@ -61,5 +64,11 @@ def kmeans(X, k, iterations=1000):
             else:
                 C[j] = np.mean(X[clss == j], axis=0)
 
+        c_ext = C[:, np.newaxis]
+        dist = np.sqrt(((X - c_ext) ** 2).sum(axis=2))
+        clss = np.argmin(dist, axis=0)
+
+        if (initial_c == C).all():
+            break
 
     return C, clss
