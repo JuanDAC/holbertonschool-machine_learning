@@ -32,12 +32,22 @@ def regular(P):
         if np.any(np.sum(P, axis=1) != 1):
             return None
 
+        cols = P.shape[0]
+        ans = np.ones((1, cols))
+        eq = np.vstack([P.T - np.identity(cols), ans])
+        results = np.vstack([np.zeros((cols, 1)), np.array([1])])
+
         _, evecs = np.linalg.eig(P.T)
         state = evecs / np.sum(evecs, axis=0)
 
-        n = P.shape[0]
+        statetionary = np.linalg.solve(eq.T.dot(eq), eq.T.dot(results)).T
         for i in np.dot(state.T, P):
             if (i >= 0).all() and np.isclose(i.sum(), 1):
-                return i.reshape(1, n)
+                return i.reshape(1, cols)
+
+        if len(np.argwhere(statetionary < 0)) > 0:
+            return None
+
+        return statetionary
     except Exception:
         return None
