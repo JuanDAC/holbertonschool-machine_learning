@@ -14,7 +14,7 @@ def variance(X, C):
     - C: numpy.ndarray of shape (k, d) containing the centroid
          means for each cluster
     Returns:
-    - var: total variance
+    - var: var, or None on failure, var is the total variance
     """
     if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None
@@ -25,8 +25,9 @@ def variance(X, C):
     n, d = X.shape
     k, d = C.shape
 
-    # Calculate the variance
-    # You may use at most 1 loop
-    var = np.sum(np.min(np.linalg.norm(X[:, np.newaxis] - C, axis=2), axis=1))
+    centroids = C[:, np.newaxis]
+    distances = np.sqrt(((X - centroids)**2).sum(axis=2))
+    min_distances = np.min(distances, axis=0)
+    veriance = np.sum(min_distances**2)
 
-    return var
+    return veriance
