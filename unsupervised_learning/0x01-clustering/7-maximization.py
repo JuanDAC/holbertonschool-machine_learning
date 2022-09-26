@@ -20,28 +20,26 @@ def maximization(X, g):
     - S: numpy.ndarray of shape (k, d, d) containing the updated
          covariance matrices for each cluster
     """
-    if not isinstance(X, np.ndarray) or len(X.shape) != 2:
+    if type(X) is not np.ndarray or type(g) is not np.ndarray:
         return None, None, None
 
-    if not isinstance(g, np.ndarray) or len(g.shape) != 2:
+    if X.ndim != 2 or g.ndim != 2 or X.shape[0] != g.shape[1]:
         return None, None, None
 
-    n, d = X.shape
-    k, n = g.shape
+    if not np.all(np.isclose(g.sum(axis=0), 1)):
+        return None, None, None
 
-    # Calculate the updated priors for each cluster
-    # You may use at most 1 loop
-    pi = np.sum(g, axis=1) / n
-
-    # Calculate the updated centroid means for each cluster
-    # You may use at most 1 loop
-    m = np.matmul(g, X) / np.sum(g, axis=1)[:, np.newaxis]
-
-    # Calculate the updated covariance matrices for each cluster
-    # You may use at most 2 loops
-    S = np.zeros((k, d, d))
-    for i in range(k):
-        X_m = X - m[i]
-        S[i] = np.matmul(g[i] * X_m.T, X_m) / np.sum(g[i])
-
-    return pi, m, S
+    try:
+        gsum = g.sum(axis=1)
+        # Calculate the updated priors for each cluster
+        pi = gsum / X.shape[0]
+        m = np.matmul(g, X) / gsum[:, np.newaxis]
+        # Calculate the updated centroid means for each cluster
+        S = np.ndarray((m.shape[0], m.shape[1], m.shape[1]))
+        for cluster in range(g.shape[0]):
+            diff = X - m[cluster]
+            S[cluster] = (np.matmul((diff * g[cluster, :, np.newaxis]).T, diff)
+                          / gsum[cluster])
+        return pi, m, S
+    except Exception:
+        return None, None, None
