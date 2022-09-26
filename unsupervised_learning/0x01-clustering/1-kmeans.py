@@ -28,13 +28,12 @@ def kmeans(X, k, iterations=1000):
     if type(iterations) != int or iterations <= 0:
         return None, None
 
-    _, d = X.shape
-
     # Initialize the cluster centroids using a multivariate uniform
     # distribution (based on0-initialize.py)
     min = np.amin(X, axis=0)
     max = np.amax(X, axis=0)
 
+    _, d = X.shape
     C = np.random.uniform(min, max, size=(k, d))
 
     # If a cluster contains no data points during the update step,
@@ -59,7 +58,7 @@ def kmeans(X, k, iterations=1000):
         # You should use numpy.random.uniform exactly twice
         # You may use at most 2 loops
         for j in range(k):
-            if np.sum(clss == j) == 0:
+            if X[clss == j].size == 0:
                 C[j] = np.random.uniform(min, max, size=(1, d))
             else:
                 C[j] = np.mean(X[clss == j], axis=0)
