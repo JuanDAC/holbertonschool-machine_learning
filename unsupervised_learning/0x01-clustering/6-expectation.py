@@ -2,8 +2,6 @@
 """
 6 Expectation
 """
-import numpy as np
-pdf = __import__('5-pdf').pdf
 
 
 def expectation(X, pi, m, S):
@@ -21,6 +19,7 @@ def expectation(X, pi, m, S):
          probabilities for each data point in each cluster
     - l: total log likelihood
     """
+    import numpy as np
     if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None, None
 
@@ -36,6 +35,7 @@ def expectation(X, pi, m, S):
     if not np.isclose([np.sum(pi)], [1])[0]:
         return None, None
 
+    pdf = __import__('5-pdf').pdf
     n, _ = X.shape
     k = pi.shape[0]
 
