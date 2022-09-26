@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""
-6 Expectation
-"""
-pdf = __import__('5-pdf').pdf
+""" 6 Expectation """
+
+
 import numpy as np
+pdf = __import__('5-pdf').pdf
 
 
 def expectation(X, pi, m, S):
@@ -21,41 +21,22 @@ def expectation(X, pi, m, S):
          probabilities for each data point in each cluster
     - l: total log likelihood
     """
-    if not isinstance(X, np.ndarray) or len(X.shape) != 2:
+    if ((type(X) is not np.ndarray or type(pi) is not np.ndarray
+         or type(m) is not np.ndarray or type(S) is not np.ndarray
+         or X.ndim != 2 or pi.ndim != 1 or m.ndim != 2 or S.ndim != 3
+         or pi.shape[0] != m.shape[0] or pi.shape[0] != S.shape[0]
+         or X.shape[1] != m.shape[1] or X.shape[1] != S.shape[1]
+         or S.shape[1] != S.shape[2] or np.any(np.linalg.det(S) == 0)
+         or not np.isclose(pi.sum(), 1))):
         return None, None
 
-    if not isinstance(pi, np.ndarray) or len(pi.shape) != 1:
-        return None, None
+    pdfs = np.ndarray((m.shape[0], X.shape[0]))
 
-    if not isinstance(m, np.ndarray) or len(m.shape) != 2:
-        return None, None
+    for cluster in range(m.shape[0]):
+        pdfs[cluster] = pdf(X, m[cluster], S[cluster])
 
-    if not isinstance(S, np.ndarray) or len(S.shape) != 3:
-        return None, None
+    pdfs = pdfs * pi[:, np.newaxis]
+    pdfsum = pdfs.sum(axis=0)
+    expects = pdfs / pdfsum
 
-    if not np.isclose([np.sum(pi)], [1])[0]:
-        return None, None
-
-    n, _ = X.shape
-    k = pi.shape[0]
-
-    # Calculate the posterior probabilities for each data point in each cluster
-    # You should use pdf = __import__('5-pdf').pdf
-    # You may use at most 1 loop
-    g = np.zeros((k, n))
-
-    denominator = 0
-    for i in range(k):
-        numerator = pdf(X, m[i], S[i]) * pi[i]
-        g[i] = numerator
-        denominator += numerator
-
-    # Normalize the posterior probabilities
-    # You may use at most 1 loop
-    g = g / denominator
-
-    # Calculate the total log likelihood
-    # You may use at most 1 loop
-    log = np.sum(np.log(np.sum(g, axis=0)))
-
-    return g, log
+    return expects, np.log(pdfsum).sum()
