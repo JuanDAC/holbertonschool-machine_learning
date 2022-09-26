@@ -33,9 +33,11 @@ def expectation(X, pi, m, S):
     if not isinstance(S, np.ndarray) or len(S.shape) != 3:
         return None, None
 
-    n, d = X.shape
-    k, d = m.shape
-    k, d, d = S.shape
+    if not np.isclose([np.sum(pi)], [1])[0]:
+        return None, None
+
+    n, _ = X.shape
+    k = pi.shape[0]
 
     pdf = __import__('5-pdf').pdf
 
@@ -53,6 +55,6 @@ def expectation(X, pi, m, S):
 
     # Calculate the total log likelihood
     # You may use at most 1 loop
-    l_ = np.sum(np.log(np.sum(pi * pdf(X, m, S), axis=0)))
+    log = np.sum(np.log(np.sum(pi * pdf(X, m, S), axis=0)))
 
-    return g, l_
+    return g, log
