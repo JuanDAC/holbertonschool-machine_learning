@@ -23,15 +23,6 @@ def regular(P):
         if P.shape[0] != P.shape[1]:
             return None
 
-        if len(P.shape) != 2:
-            return None
-
-        if np.any(P < 0):
-            return None
-
-        if np.any(np.sum(P, axis=1) != 1):
-            return None
-
         cols = P.shape[0]
         ans = np.ones((1, cols))
         eq = np.vstack([P.T - np.identity(cols), ans])
