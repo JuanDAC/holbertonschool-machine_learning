@@ -2,8 +2,8 @@
 """
 6 Expectation
 """
-import numpy as np
 pdf = __import__('5-pdf').pdf
+import numpy as np
 
 
 def expectation(X, pi, m, S):
