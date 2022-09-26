@@ -35,7 +35,6 @@ def expectation(X, pi, m, S):
     if not np.isclose([np.sum(pi)], [1])[0]:
         return None, None
 
-    pdf = __import__('5-pdf').pdf
     n, _ = X.shape
     k = pi.shape[0]
 
