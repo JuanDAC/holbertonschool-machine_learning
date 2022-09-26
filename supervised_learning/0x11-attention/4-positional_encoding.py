@@ -23,5 +23,7 @@ def positional_encoding(max_seq_len, dm):
     angle_rads = pos * angle_rates
     sines = np.sin(angle_rads[:, 0::2])
     cosines = np.cos(angle_rads[:, 1::2])
-    pos_encoding = np.concatenate([sines, cosines], axis=-1)
+    pos_encoding = np.zeros((max_seq_len, dm))
+    pos_encoding[:, 0::2] = sines
+    pos_encoding[:, 1::2] = cosines
     return pos_encoding
