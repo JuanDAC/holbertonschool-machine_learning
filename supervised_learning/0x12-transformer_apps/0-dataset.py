@@ -10,7 +10,8 @@ class Dataset:
     def __init__(self):
         """
         Constructor should call the instance method
-        tokenize_dataset to create the instance attributes tokenizer_pt and tokenizer_en
+        tokenize_dataset to create the instance attributes tokenizer_pt
+        and tokenizer_en
         """
         self.data_train = tfds.load(
             'ted_hrlr_translate/pt_to_en', split='train', as_supervised=True)
