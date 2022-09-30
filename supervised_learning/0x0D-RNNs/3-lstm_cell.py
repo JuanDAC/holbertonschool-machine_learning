@@ -42,7 +42,7 @@ class LSTMCell:
         self.bo = np.zeros((1, h))
         self.by = np.zeros((1, o))
 
-    def softmax(x):
+    def softmax(self, x):
         """
         Method that performs the softmax
         Arguments:
@@ -57,7 +57,7 @@ class LSTMCell:
         """
         return np.exp(x) / np.sum(np.exp(x), axis=1, keepdims=True)
 
-    def sigmoid(x):
+    def sigmoid(self, x):
         """
         Method that performs the sigmoid
         Arguments:
