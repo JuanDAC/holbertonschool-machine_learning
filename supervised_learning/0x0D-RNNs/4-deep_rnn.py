@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-File that contains the class LSTMCell
+File that contains the deep RNN
 """
 
 import numpy as np
