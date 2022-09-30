@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-File that contains the  bidirectional RNN 
+File that contains the  bidirectional RNN
 """
 import numpy as np
 
