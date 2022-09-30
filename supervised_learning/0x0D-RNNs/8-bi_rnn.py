@@ -23,22 +23,21 @@ def bi_rnn(bi_cell, X, h_0, h_t):
         - h_t is the initial hidden state in the backward direction,
               given as a numpy.ndarray of shape (m, h)
     Returns: H, Y
-        - H is a numpy.ndarray containing all of the concatenated hidden states
+        - H is a numpy.ndarray containing all of the concatenated
+            hidden states
         - Y is a numpy.ndarray containing all of the outputs
     """
     t, m, i = X.shape
     _, h = h_0.shape
-    H = np.zeros((t, m, 2 * h))
+    Hf = np.zeros((t + 1, m, h))
+    Hb = np.zeros((t + 1, m, h))
+    H = np.zeros((t + 1, m, 2 * h))
     Y = []
-    h_next = h_0
-    for t in range(t):
-        h_next, y = bi_cell.forward(h_next, X[t])
-        H[t] = h_next
-        Y.append(y)
-    h_next = h_t
-    for t in range(t - 1, -1, -1):
-        h_next, y = bi_cell.backward(h_next, X[t])
-        H[t] += h_next
-        Y[t] += y
-    Y = np.array(Y)
+    Hf[0] = h_0
+    Hb[t] = h_t
+    for step in range(t):
+        Hf[step + 1], _ = bi_cell.forward(Hf[step], X[step])
+        Hb[t - step - 1], _ = bi_cell.backward(Hb[t - step], X[t - step - 1])
+        H[step + 1] = np.concatenate((Hf[step + 1], Hb[t - step - 1]), axis=1)
+    Y = bi_cell.output(H)
     return H, Y
