@@ -14,7 +14,8 @@ def deep_rnn(rnn_cells, X, h_0):
                     used for the forward propagation
             * l is the number of layers
         - X is the data to be used, given as a numpy.ndarray of shape (t, m, i)
-            * t is the maximum number of time steps
+            * t is the maximum number:w
+             of time steps
             * m is the batch size
                 i is the dimensionality of the data
         - h_0 is the initial hidden state, given as a numpy.ndarray of shape
@@ -27,10 +28,16 @@ def deep_rnn(rnn_cells, X, h_0):
     t, m, i = X.shape
     l, _, h = h_0.shape
     H = np.zeros((t + 1, l, m, h))
-    Y = np.zeros((t, m, rnn_cells[-1].by.shape[1]))
     H[0] = h_0
     for t in range(t):
-        H[t + 1][0], Y[t] = rnn_cells[0].forward(H[t][0], X[t])
-        for l in range(1, l):
-            H[t + 1][l], Y[t] = rnn_cells[l].forward(H[t + 1][l - 1], Y[t])
+        for layer in range(l):
+            if layer == 0:
+                H[t + 1,
+                    layer], _ = rnn_cells[layer].forward(H[t, layer], X[t])
+            else:
+                H[t + 1, layer], _ = rnn_cells[layer].forward(
+                    H[t, layer], H[t + 1, layer - 1])
+    Y = np.zeros((t, m, rnn_cells[-1].by.shape[1]))
+    for t in range(t):
+        Y[t] = rnn_cells[-1].forward(H[t + 1, -1], H[t + 1, -2])[1]
     return H, Y
