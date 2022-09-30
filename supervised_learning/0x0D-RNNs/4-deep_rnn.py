@@ -57,11 +57,13 @@ def deep_rnn(rnn_cells, X, h_0):
         - Y is a numpy.ndarray containing all of the outputs
     """
     t, m, i = X.shape
-    l, _, h = h_0.shape
-    H = np.zeros((l, t + 1, m, h))
-    Y = np.zeros((l, t, m, rnn_cells[-1].by.shape[1]))
-    H[:, 0] = h_0
-    for t in range(t):
-        H[:, t + 1, :, :], Y[:, t, :, :] = deep_rnn_cell(rnn_cells, X[t],
-                                                         H[:, t])
+    l, m, h = h_0.shape
+    H = np.zeros((t + 1, l, m, h))
+    Y = np.zeros((t, l, m, rnn_cells[-1].by.shape[1]))
+    H[0] = h_0
+    for time_step in range(t):
+        H[time_step + 1], Y[time_step] = deep_rnn_cell(
+            rnn_cells,
+            X[time_step],
+            H[time_step])
     return H, Y
