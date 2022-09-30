@@ -78,8 +78,8 @@ class BidirectionalCell:
             - Y, the outputs
         """
         t, m, _ = H.shape
-        Y = []
-        for i in range(t):
-            y = np.matmul(H[i], self.Wy) + self.by
-            Y.append(y)
-        return np.array(Y)
+        Y = np.zeros((t, m, self.by.shape[1]))
+        for step in range(t):
+            y = np.matmul(H[step], self.Wy) + self.by
+            Y[step] = np.exp(y) / np.sum(np.exp(y), axis=1, keepdims=True)
+        return Y
