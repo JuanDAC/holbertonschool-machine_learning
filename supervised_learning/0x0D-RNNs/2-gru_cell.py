@@ -49,13 +49,17 @@ class GRUCell:
             - h_next is the next hidden state
             - y is the output of the cell
         """
-        z = np.matmul(np.concatenate((h_prev, x_t), axis=1), self.Wz) + self.bz
-        z = 1 / (1 + np.exp(-z))
-        r = np.matmul(np.concatenate((h_prev, x_t), axis=1), self.Wr) + self.br
-        r = 1 / (1 + np.exp(-r))
-        h_next = np.tanh(np.matmul(np.concatenate(
-            (r * h_prev, x_t), axis=1), self.Wh) + self.bh)
-        h_next = z * h_prev + (1 - z) * h_next
+        z = np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
+                             self.Wz) + self.bz) / \
+            (np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
+                              self.Wz) + self.bz) + 1)
+        r = np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
+                             self.Wr) + self.br) / \
+            (np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
+                              self.Wr) + self.br) + 1)
+        h = np.tanh(np.matmul(np.concatenate((r * h_prev, x_t), axis=1),
+                              self.Wh) + self.bh)
+        h_next = (1 - z) * h_prev + z * h
         y = np.exp(np.matmul(h_next, self.Wy) + self.by) / \
             np.sum(np.exp(np.matmul(h_next, self.Wy) + self.by),
                    axis=1, keepdims=True)
