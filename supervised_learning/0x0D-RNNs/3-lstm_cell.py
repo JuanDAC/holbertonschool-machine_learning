@@ -42,6 +42,36 @@ class LSTMCell:
         self.bo = np.zeros((1, h))
         self.by = np.zeros((1, o))
 
+    def softmax(x):
+        """
+        Method that performs the softmax
+        Arguments:
+            - x: numpy.ndarray of shape (t, m, i) that contains
+                    the data to be transformed
+                * t is the maximum number of time steps
+                * m is the batch size for the data
+                * i is the dimensionality of the data
+        Returns:
+            - softmax: numpy.ndarray of shape (t, m, i) containing
+                        the softmax transformation
+        """
+        return np.exp(x) / np.sum(np.exp(x), axis=1, keepdims=True)
+
+    def sigmoid(x):
+        """
+        Method that performs the sigmoid
+        Arguments:
+            - x: numpy.ndarray of shape (t, m, i) that contains
+                    the data to be transformed
+                * t is the maximum number of time steps
+                * m is the batch size for the data
+                * i is the dimensionality of the data
+        Returns:
+            - sigmoid: numpy.ndarray of shape (t, m, i) containing
+                        the sigmoid transformation
+        """
+        return 1 / (1 + np.exp(-x))
+
     def forward(self, h_prev, c_prev, x_t):
         """
         Method that performs forward propagation for one time step
@@ -58,28 +88,11 @@ class LSTMCell:
             - c_next: the next cell state
             - y: the output of the cell
         """
-        # forget gate
-        f = np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
-                             self.Wf) + self.bf) / \
-            (np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
-                              self.Wf) + self.bf) + 1)
-        # update gate
-        u = np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
-                             self.Wu) + self.bu) / \
-            (np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
-                              self.Wu) + self.bu) + 1)
-        # intermediate cell state
-        c = np.tanh(np.matmul(np.concatenate((h_prev, x_t), axis=1),
-                              self.Wc) + self.bc)
-        # next cell state
-        c_next = f * c_prev + u * c
-        # output gate
-        o = np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
-                             self.Wo) + self.bo) / \
-            (np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
-                              self.Wo) + self.bo) + 1)
-        # next hidden state
+        concat = np.concatenate((h_prev, x_t), axis=1)
+        f = self.sigmoid(np.matmul(concat, self.Wf) + self.bf)
+        u = self.sigmoid(np.matmul(concat, self.Wu) + self.bu)
+        c_next = f * c_prev + u * np.tanh(np.matmul(concat, self.Wc) + self.bc)
+        o = self.sigmoid(np.matmul(concat, self.Wo) + self.bo)
         h_next = o * np.tanh(c_next)
-        # output
-        y = np.matmul(h_next, self.Wy) + self.by
+        y = self.softmax(np.matmul(h_next, self.Wy) + self.by)
         return h_next, c_next, y
