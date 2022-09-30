@@ -58,21 +58,28 @@ class LSTMCell:
             - c_next: the next cell state
             - y: the output of the cell
         """
+        # forget gate
         f = np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
                              self.Wf) + self.bf) / \
             (np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
                               self.Wf) + self.bf) + 1)
+        # update gate
         u = np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
                              self.Wu) + self.bu) / \
             (np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
                               self.Wu) + self.bu) + 1)
+        # intermediate cell state
         c = np.tanh(np.matmul(np.concatenate((h_prev, x_t), axis=1),
                               self.Wc) + self.bc)
+        # next cell state
         c_next = f * c_prev + u * c
+        # output gate
         o = np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
                              self.Wo) + self.bo) / \
             (np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
                               self.Wo) + self.bo) + 1)
+        # next hidden state
         h_next = o * np.tanh(c_next)
+        # output
         y = np.matmul(h_next, self.Wy) + self.by
         return h_next, c_next, y
