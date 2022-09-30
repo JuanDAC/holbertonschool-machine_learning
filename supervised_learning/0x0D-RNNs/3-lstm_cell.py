@@ -91,7 +91,8 @@ class LSTMCell:
         concat = np.concatenate((h_prev, x_t), axis=1)
         f = self.sigmoid(np.matmul(concat, self.Wf) + self.bf)
         u = self.sigmoid(np.matmul(concat, self.Wu) + self.bu)
-        c_next = f * c_prev + u * np.tanh(np.matmul(concat, self.Wc) + self.bc)
+        c = np.tanh(np.matmul(concat, self.Wc) + self.bc)
+        c_next = f * c_prev + u * c
         o = self.sigmoid(np.matmul(concat, self.Wo) + self.bo)
         h_next = o * np.tanh(c_next)
         y = self.softmax(np.matmul(h_next, self.Wy) + self.by)
