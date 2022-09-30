@@ -58,14 +58,21 @@ class LSTMCell:
             - c_next: the next cell state
             - y: the output of the cell
         """
-        concat = np.concatenate((h_prev, x_t), axis=1)
-        ft = np.sigmoid(np.matmul(concat, self.Wf) + self.bf)
-        ut = np.sigmoid(np.matmul(concat, self.Wu) + self.bu)
-        ct = np.tanh(np.matmul(concat, self.Wc) + self.bc)
-        c_next = ft * c_prev + ut * ct
-        ot = np.sigmoid(np.matmul(concat, self.Wo) + self.bo)
-        h_next = ot * np.tanh(c_next)
-        y = np.exp(np.matmul(h_next, self.Wy) + self.by) / \
-            np.sum(np.exp(np.matmul(h_next, self.Wy) + self.by),
-                   axis=1, keepdims=True)
+        f = np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
+                             self.Wf) + self.bf) / \
+            (np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
+                              self.Wf) + self.bf) + 1)
+        u = np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
+                             self.Wu) + self.bu) / \
+            (np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
+                              self.Wu) + self.bu) + 1)
+        c = np.tanh(np.matmul(np.concatenate((h_prev, x_t), axis=1),
+                              self.Wc) + self.bc)
+        c_next = f * c_prev + u * c
+        o = np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
+                             self.Wo) + self.bo) / \
+            (np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
+                              self.Wo) + self.bo) + 1)
+        h_next = o * np.tanh(c_next)
+        y = np.matmul(h_next, self.Wy) + self.by
         return h_next, c_next, y
