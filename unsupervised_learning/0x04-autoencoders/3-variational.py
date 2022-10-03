@@ -42,7 +42,8 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
         Function that samples from a normal distribution
         """
         z_mean, z_log_var = args
-        epsilon = keras.backend.random_normal(shape=(latent_dims,))
+        shape = keras.backend.shape(z_mean)
+        epsilon = keras.backend.random_normal(shape=(*shape,))
         return z_mean + keras.backend.exp(z_log_var / 2) * epsilon
 
     z = keras.layers.Lambda(sampling)([z_mean, z_log_var])
