@@ -60,21 +60,13 @@ def uni_bleu(references, sentence):
       - references is a list of reference translations
         * each reference translation is a list of the words in the translation
       - sentence is a list containing the model proposed sentence
-        * each word in the sentence should be considered as a possible match
     Returns:
       - the unigram BLEU score
     """
-    count_values = count_appearances(references, sentence)
-    reference_clipping, len_sentence = clipping(references, sentence)
-
+    count_dict = count_appearances(references, sentence)
     len_sentence = len(sentence)
-
-    if len_sentence > reference_clipping:
-        bp = 1
-
-    if len_sentence <= reference_clipping:
-        bp = np.exp(1 - (float(reference_clipping) / len_sentence))
-
-    bleu_score = bp * np.exp(np.log(sum(count_values)) / len_sentence)
-
-    return bleu_score
+    len_reference = clipping(references, sentence)
+    precision = sum(count_dict) / len_sentence
+    brevity = 1 if len_sentence > len_reference else np.exp(1 - len_reference /
+                                                            len_sentence)
+    return brevity * precision
