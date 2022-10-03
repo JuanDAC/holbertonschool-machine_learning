@@ -37,20 +37,22 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
     for i in range(1, len(hidden_layers)):
         encoded = keras.layers.Dense(
             hidden_layers[i], activation='relu')(encoded)
-    z_mean = keras.layers.Dense(latent_dims, activation=None)(encoded)
-    z_log_var = keras.layers.Dense(latent_dims, activation=None)(encoded)
+
+    # Latent space
+    mean = keras.layers.Dense(latent_dims, activation=None)(encoded)
+    log_var = keras.layers.Dense(latent_dims, activation=None)(encoded)
 
     # Sampling
-
     def sampling(args):
         """
-        Function that samples from a normal distribution
+        Sampling function
         """
-        z_mean, z_log_var = args
-        epsilon = keras.backend.random_normal(shape=(latent_dims,))
-        return z_mean + keras.backend.exp(z_log_var / 2) * epsilon
+        mean, log_var = args
+        epsilon = keras.backend.random_normal(
+            shape=keras.backend.shape(mean), mean=0., stddev=1.)
+        return mean + keras.backend.exp(log_var / 2) * epsilon
 
-    z = keras.layers.Lambda(sampling)([z_mean, z_log_var])
+    z = keras.layers.Lambda(sampling)([mean, log_var])
 
     # Decoder
     input_decoder = keras.Input(shape=(latent_dims,))
@@ -61,14 +63,14 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
             hidden_layers[i], activation='relu')(decoded)
     decoded = keras.layers.Dense(input_dims, activation='sigmoid')(decoded)
 
-    # Encoder
-    encoder = keras.Model(inputs=input_encoder, outputs=[z_mean, z_log_var, z])
+    # Encoder model
+    encoder = keras.Model(inputs=input_encoder, outputs=[z, mean, log_var])
 
-    # Decoder
+    # Decoder model
     decoder = keras.Model(inputs=input_decoder, outputs=decoded)
 
-    # Autoencoder
+    # Autoencoder model
     auto = keras.Model(inputs=input_encoder,
-                       outputs=decoder(encoder(input_encoder)[2]))
+                       outputs=decoder(encoder(input_encoder)[0]))
     auto.compile(optimizer='adam', loss='binary_crossentropy')
     return encoder, decoder, auto
