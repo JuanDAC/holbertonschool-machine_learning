@@ -37,13 +37,13 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
     z_log_var = keras.layers.Dense(latent_dims, activation=None)(encoded)
 
     # Sampling
+
     def sampling(args):
         """
         Function that samples from a normal distribution
         """
         z_mean, z_log_var = args
-        shape = keras.backend.shape(z_mean)
-        epsilon = keras.backend.random_normal(shape=(*shape,))
+        epsilon = keras.backend.random_normal(shape=(latent_dims,))
         return z_mean + keras.backend.exp(z_log_var / 2) * epsilon
 
     z = keras.layers.Lambda(sampling)([z_mean, z_log_var])
@@ -57,10 +57,14 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
             hidden_layers[i], activation='relu')(decoded)
     decoded = keras.layers.Dense(input_dims, activation='sigmoid')(decoded)
 
-    # Autoencoder
-    encoder = keras.Model(inputs=input_encoder, outputs=[z, z_mean, z_log_var])
+    # Encoder
+    encoder = keras.Model(inputs=input_encoder, outputs=[z_mean, z_log_var, z])
+
+    # Decoder
     decoder = keras.Model(inputs=input_decoder, outputs=decoded)
+
+    # Autoencoder
     auto = keras.Model(inputs=input_encoder,
-                       outputs=decoder(encoder(input_encoder)[0]))
+                       outputs=decoder(encoder(input_encoder)[2]))
     auto.compile(optimizer='adam', loss='binary_crossentropy')
     return encoder, decoder, auto
