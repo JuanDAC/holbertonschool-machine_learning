@@ -66,7 +66,6 @@ def precision(references, sentence, n):
     ngram_references, ngram_sentence = transform_grams(
         references, sentence, n)
     ngram_sentence_length = len(ngram_sentence)
-    sentence_length = len(sentence)
 
     sentence_dictionary = {word: ngram_sentence.count(word) for
                            word in ngram_sentence}
