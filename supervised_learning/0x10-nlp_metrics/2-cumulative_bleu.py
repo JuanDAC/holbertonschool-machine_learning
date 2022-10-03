@@ -5,7 +5,7 @@ File that contains the function cumulative_bleu
 import numpy as np
 
 
-def ngram_bleu(references, sentence, n):
+def precision(references, sentence, n):
     """
     Function that calculates the n-gram BLEU score for a sentence:
     Arguments:
@@ -90,3 +90,30 @@ def ngram_bleu(references, sentence, n):
     precision = sum(matchings.values()) / ngram_sentence_length
 
     return precision
+
+
+def ngram_bleu(references, sentence, n):
+    """
+    Function that calculates the n-gram BLEU score for a sentence:
+    Arguments:
+        - references is a list of reference translations
+            * each reference translation is a list of the words in the
+              translation
+        - sentence is a list containing the model proposed sentence
+        - n is the size of the n-gram to use for evaluation
+    Returns:
+        - the n-gram BLEU score
+    """
+    precision_value = precision(references, sentence, n)
+    sentence_length = len(sentence)
+    references_length = [len(ref) for ref in references]
+    closest_reference = min(references_length,
+                            key=lambda x: abs(x - sentence_length))
+    if sentence_length > closest_reference:
+        bp = 1
+    else:
+        bp = np.exp(1 - closest_reference / sentence_length)
+
+    bleu_score = bp * precision_value
+
+    return bleu_score
