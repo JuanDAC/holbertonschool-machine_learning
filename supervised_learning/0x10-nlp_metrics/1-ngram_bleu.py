@@ -47,30 +47,37 @@ def ngram_bleu(references, sentence, n):
     Returns:
         - the n-gram BLEU score
     """
-    references, sentence = transform_grams(references, sentence, n)
+    ngram_references, ngram_sentence = transform_grams(references, sentence, n)
+    ngram_sentence_length = len(ngram_sentence)
+    sentence_length = len(sentence)
 
-    clipped_count = 0
-    count = 0
-    for word in sentence:
-        if word in references:
-            clipped_count += 1
-        count += 1
-
-    if clipped_count == 0:
+    if ngram_sentence_length == 0:
         return 0
 
-    precision = clipped_count / count
-    brevity_penalty = 1
-    len_sentence = len(sentence)
-    list_references = []
-    for reference in references:
-        len_reference = len(reference)
-        list_references.append(
-            ((abs(len_reference - len_sentence)), len_reference))
+    count_dict = {}
+    for reference in ngram_references:
+        for word in reference:
+            if word in ngram_sentence and word not in count_dict.keys():
+                count_dict[word] = reference.count(word)
+                continue
+            if word in ngram_sentence:
+                new = reference.count(word)
+                old = count_dict[word]
+                count_dict[word] = max(new, old)
 
-    reference_len = sorted(list_references, key=lambda x: x[0])
+    clipped_count = sum(count_dict.values())
+    precision = clipped_count / ngram_sentence_length
 
-    if len_sentence > reference_len[0][1]:
-        brevity_penalty = np.exp(1 - (len_sentence / reference_len[0][1]))
+    reference_len = []
+    for reference in ngram_references:
+        reference_len.append(len(reference))
+    closest_ref = min(reference_len, key=lambda x: abs(x - sentence_length))
 
-    return brevity_penalty * precision
+    if sentence_length > closest_ref:
+        bp = 1
+    else:
+        bp = np.exp(1 - (closest_ref / sentence_length))
+
+    bleu_score = bp * precision
+
+    return bleu_score
