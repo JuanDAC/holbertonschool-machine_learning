@@ -25,6 +25,10 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
     All layers should use a relu activation except for the mean and log
     variance layers in the encoder, which should use None, and the last
     layer in the decoder, which should use sigmoid
+
+    [Expected]
+    Autoencoder model is compiled correctly
+    5.44117e+02
     """
     # Encoder
     input_encoder = keras.Input(shape=(input_dims,))
