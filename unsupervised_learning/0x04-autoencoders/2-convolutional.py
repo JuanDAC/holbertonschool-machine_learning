@@ -43,20 +43,37 @@ def autoencoder(input_dims, filters, latent_dims):
         encoded = keras.layers.MaxPooling2D((2, 2), padding='same')(encoded)
 
     # Decoder
-    input_decoder = keras.Input(shape=latent_dims)
-    decoded = keras.layers.Conv2D(
-        filters[-1], (3, 3), activation='relu', padding='same')(input_decoder)
-    decoded = keras.layers.UpSampling2D((2, 2))(decoded)
-    for i in range(len(filters) - 2, -1, -1):
-        decoded = keras.layers.Conv2D(
-            filters[i], (3, 3), activation='relu', padding='same')(decoded)
-        decoded = keras.layers.UpSampling2D((2, 2))(decoded)
-    decoded = keras.layers.Conv2D(
-        input_dims[-1], (3, 3), activation='sigmoid', padding='valid')(decoded)
+    input_decoder = keras.Input(shape=(latent_dims))
+
+    prev_layer = input_decoder
+    for i in range(len(filters) - 1, 0, -1):
+        hidden_layer = keras.layers.Conv2D(filters[i],
+                                           activation='relu',
+                                           kernel_size=(3, 3),
+                                           padding='same')
+        prev_layer = hidden_layer(prev_layer)
+        upsample_layer = keras.layers.UpSampling2D((2, 2))
+        prev_layer = upsample_layer(prev_layer)
+
+    # Last layer
+    last_layer = keras.layers.Conv2D(filters[0],
+                                     kernel_size=(3, 3),
+                                     padding='valid',
+                                     activation='relu')
+    prev_layer = last_layer(prev_layer)
+    upsample_layer = keras.layers.UpSampling2D((2, 2))
+    prev_layer = upsample_layer(prev_layer)
+
+    # Output layer
+    output_layer = keras.layers.Conv2D(input_dims[2],
+                                       activation='sigmoid',
+                                       kernel_size=(3, 3),
+                                       padding='same')
+    decoder_outputs = output_layer(prev_layer)
 
     # Autoencoder
     encoder = keras.Model(inputs=input_encoder, outputs=encoded)
-    decoder = keras.Model(inputs=input_decoder, outputs=decoded)
+    decoder = keras.Model(inputs=input_decoder, outputs=decoder_outputs)
     auto = keras.Model(inputs=input_encoder,
                        outputs=decoder(encoder(input_encoder)))
     auto.compile(optimizer='adam', loss='binary_crossentropy')
