@@ -5,65 +5,68 @@ File that contains the function cumulative_bleu
 import numpy as np
 
 
-def precision(references, sentence, n):
+def transform_grams(references, sentence, n):
     """
-    Function that calculates the n-gram BLEU score for a sentence:
+    Transforms references and sentence based on grams
     Arguments:
         - references is a list of reference translations
             * each reference translation is a list of the words in the
-              translation
+                translation
         - sentence is a list containing the model proposed sentence
         - n is the size of the n-gram to use for evaluation
-    Returns:
-        - the n-gram BLEU score
+    Returns: the n-gram BLEU score
+        - references, sentence
     """
-    def transform_grams(references, sentence, n):
-        """
-        Transforms references and sentence based on grams
-        Arguments:
-            - references is a list of reference translations
-            - sentence is a list containing the model proposed sentence
-            - n is the size of the n-gram to use for evaluation
-        Returns:
-            - ngram_references is a list of reference translations
-            - ngram_sentence is a list containing the model proposed sentence
-        """
-        if n == 1:
-            return references, sentence
+    if n == 1:
+        return references, sentence
 
-        ngram_sentence = []
-        sentence_length = len(sentence)
+    ngram_sentence = []
+    sentence_length = len(sentence)
 
-        for i, word in enumerate(sentence):
+    for i, word in enumerate(sentence):
+        count = 0
+        w = word
+        for j in range(1, n):
+            if sentence_length > i + j:
+                w += " " + sentence[i + j]
+                count += 1
+        if count == j:
+            ngram_sentence.append(w)
+
+    ngram_references = []
+
+    for ref in references:
+        ngram_ref = []
+        ref_length = len(ref)
+
+        for i, word in enumerate(ref):
             count = 0
             w = word
             for j in range(1, n):
-                if sentence_length > i + j:
-                    w += " " + sentence[i + j]
+                if ref_length > i + j:
+                    w += " " + ref[i + j]
                     count += 1
             if count == j:
-                ngram_sentence.append(w)
+                ngram_ref.append(w)
+        ngram_references.append(ngram_ref)
 
-        ngram_references = []
+    return ngram_references, ngram_sentence
 
-        for ref in references:
-            ngram_ref = []
-            ref_length = len(ref)
 
-            for i, word in enumerate(ref):
-                count = 0
-                w = word
-                for j in range(1, n):
-                    if ref_length > i + j:
-                        w += " " + ref[i + j]
-                        count += 1
-                if count == j:
-                    ngram_ref.append(w)
-            ngram_references.append(ngram_ref)
-
-        return ngram_references, ngram_sentence
-    ngram_references, ngram_sentence = transform_grams(references, sentence, n)
+def precision(references, sentence, n):
+    """
+    Calculates the precision for n-gram BLEU score for a sentence
+    Arguments:
+        - references contains reference translations
+        - sentence contains the model proposed sentence
+        - n the size of the n-gram to use for evaluation
+    Returns:
+        - the precision for n-gram BLEU score
+    """
+    ngram_references, ngram_sentence = transform_grams(
+        references, sentence, n)
     ngram_sentence_length = len(ngram_sentence)
+    sentence_length = len(sentence)
 
     sentence_dictionary = {word: ngram_sentence.count(word) for
                            word in ngram_sentence}
@@ -92,28 +95,49 @@ def precision(references, sentence, n):
     return precision
 
 
-def ngram_bleu(references, sentence, n):
+def brevity_penalty(references, sentence):
     """
-    Function that calculates the n-gram BLEU score for a sentence:
+    Function that calculates the brevity penalty for a sentence
     Arguments:
         - references is a list of reference translations
             * each reference translation is a list of the words in the
-              translation
+                translation
         - sentence is a list containing the model proposed sentence
-        - n is the size of the n-gram to use for evaluation
-    Returns:
-        - the n-gram BLEU score
+    Returns: the brevity penalty for sentence
     """
-    precision_value = precision(references, sentence, n)
-    sentence_length = len(sentence)
-    references_length = [len(ref) for ref in references]
-    closest_reference = min(references_length,
-                            key=lambda x: abs(x - sentence_length))
-    if sentence_length > closest_reference:
+    c = len(sentence)
+    r = 0
+    for ref in references:
+        if abs(len(ref) - c) < abs(r - c):
+            r = len(ref)
+
+    if c > r:
         bp = 1
     else:
-        bp = np.exp(1 - closest_reference / sentence_length)
+        bp = np.exp(1 - r / c)
 
-    bleu_score = bp * precision_value
+    return bp
 
-    return bleu_score
+
+def cumulative_bleu(references, sentence, n):
+    """
+    Calculates the cumulative n-gram BLEU score for a sentence
+    Arguments:
+        - references list of reference translations
+        - sentence contains the model proposed sentence
+        - n the size of the larget n-gram to use for evaluation
+    Returns:
+        - score the cumulative n-gram BLEU score
+    """
+    precisions = [0] * n
+    for i in range(n):
+        precisions[i] = precision(references, sentence, i + 1)
+
+    if len(precisions) > 0:
+        bp = brevity_penalty(references, sentence)
+        s = np.exp(np.sum((1 / n) * np.log(precisions)))
+        score = bp * s
+    else:
+        score = 0
+
+    return score
