@@ -76,8 +76,10 @@ class GaussianProcess:
     def update(self, X_new, Y_new):
         """
         Public instance method that updates a Gaussian Process:
-            - X_new is a numpy.ndarray of shape (1,) that represents the new sample point
-            - Y_new is a numpy.ndarray of shape (1,) that represents the new sample function value
+            - X_new is a numpy.ndarray of shape (1,) that represents the new
+                    sample point
+            - Y_new is a numpy.ndarray of shape (1,) that represents the new
+                    sample function value
         Updates the public instance attributes X, Y, and K
         """
         self.X = np.vstack((self.X, X_new))
