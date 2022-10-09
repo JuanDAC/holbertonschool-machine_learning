@@ -60,7 +60,12 @@ class BayesianOptimization:
                  expected improvement of each potential sample
         """
         mu, sigma = self.gp.predict(self.X_s)
-        mu_sample_opt = np.max(self.gp.Y)
+        if self.minimize is False:
+            mu_sample_opt = np.amax(self.gp.Y)
+            imp = mu - mu_sample_opt - self.xsi
+        else:
+            mu_sample_opt = np.amin(self.gp.Y)
+            imp = mu_sample_opt - mu - self.xsi
         with np.errstate(divide='warn'):
             if self.minimize is True:
                 imp = mu_sample_opt - mu - self.xsi
