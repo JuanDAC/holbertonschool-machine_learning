@@ -48,11 +48,13 @@ References :
 
 ## Installing Keras-RL
 
+`pip install --user keras-rl `
+
 ### Dependencies
 
-`pip install --user keras-rl `
-(that should already be installed)
-`pip install --user keras==2.2.4 pip install --user Pillow pip install --user h5py `
+`pip install --user keras==2.2.4 `
+`pip install --user Pillow `
+`pip install --user h5py `
 
 ## Tasks
 
