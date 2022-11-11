@@ -20,7 +20,7 @@ def monte_carlo(env, V, policy, episodes=5000, max_steps=100, alpha=0.1, gamma=0
     for _ in range(episodes):
         state = env.reset()
         states, rewards = [], []
-        for step in range(max_steps):
+        for _ in range(max_steps):
             action = policy(state)
             new_state, reward, done, info = env.step(action)
             states.append(state)
