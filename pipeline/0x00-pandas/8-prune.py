@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+"""
+File from numpy
+"""
+
+import pandas as pd
+from_file = __import__('2-from_file').from_file
+
+df = from_file('coinbaseUSD_1-min_data_2014-12-01_to_2019-01-09.csv', ',')
+
+df = df.loc[::-1, ['High', 'Low', 'Close', 'Volume_(BTC)']]
+df = df.dropna(subset=['Close'])
+print(df.tail())
+
+print(df.head())
