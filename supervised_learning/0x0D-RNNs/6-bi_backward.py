@@ -1,65 +1,71 @@
 #!/usr/bin/env python3
 """
-File that contains the class BidirectionalCell that
-represents a bidirectional cell of an RNN
+Module contains class BidirectionalCell that
+represents a bidirectional cell of an RNN.
 """
+
 
 import numpy as np
 
 
-class BidirectionalCell:
-    """
-    Class BidirectionalCell that represents a bidirectional cell of an RNN
-    """
+class BidirectionalCell():
+    """Represents a bidirectional cell of an RNN."""
 
     def __init__(self, i, h, o):
         """
-        Constructor for the class BidirectionalCell
-        Arguments:
-            - i is the dimensionality of the data
-            - h is the dimensionality of the hidden states
-            - o is the dimensionality of the outputs
-        Public instance attributes
-            - Whf and bhfare for the hidden states in the forward direction
-            - Whb and bhbare for the hidden states in the backward direction
+        Class constructor.
+
+        Args:
+            i: Dimensionality of the data.
+            h: Dimensionality of the hidden state.
+            o: Dimensionality of the outputs.
+
+        Public Attributes:
+            Whf: Hidden state weights for forward direction.
+            bhf: Hidden state biases for forward direction.
+            Whb: Hidden state weights for backward direction.
+            bhb: Hidden state biases for backward direction.
+            Wy: Output weights.
+            by: Output biases.
         """
-        self.Whf = np.random.normal(size=(i + h, h))
-        self.Whb = np.random.normal(size=(i + h, h))
-        self.Wy = np.random.normal(size=(2 * h, o))
+
+        self.Whf = np.random.randn(i+h, h)
+        self.Whb = np.random.randn(i+h, h)
+        self.Wy = np.random.randn(2*h, o)
         self.bhf = np.zeros((1, h))
         self.bhb = np.zeros((1, h))
         self.by = np.zeros((1, o))
 
     def forward(self, h_prev, x_t):
         """
-        Method that calculates the hidden state in the forward
-        direction for one time step
-        Arguments:
-            - x_t is a numpy.ndarray of shape (m, i) that contains
-                  the data input for the cell
-                * m is the batch size for the data
-            - h_prev is a numpy.ndarray of shape (m, h) containing
-                     the previous hidden state
-        Returns:
-            - h_next, the next hidden state
+        Calculates hidden state in forward direction for 1 time step.
+
+        Args:
+            x_t: numpy.ndarray - (m, i) Data input for the cell.
+                m: Batch size for the data.
+            h_prev: numpy.ndarray - (m, h) Previous hidden state.
+
+        Return: h_next
+            h_next: Next hidden state.
         """
-        concat = np.concatenate((h_prev, x_t), axis=1)
-        h_next = np.tanh(np.matmul(concat, self.Whf) + self.bhf)
-        return h_next
+
+        dot_x = np.dot(x_t, self.Whf[h_prev.shape[1]:, :])
+        dot_h = np.dot(h_prev, self.Whf[:h_prev.shape[1], :])
+        return np.tanh(dot_x + dot_h + self.bhf)
 
     def backward(self, h_next, x_t):
         """
-        Method that calculates the hidden state in the backward
-        direction for one time step
-        Arguments:
-            - x_t is a numpy.ndarray of shape (m, i) that contains
-                     the data input for the cell
-                * m is the batch size for the data
-            - h_next is a numpy.ndarray of shape (m, h) containing
-                     the next hidden state
-        Returns:
-            - h_pev, the previous hidden state
+        Calculates hidden state in backward direction for 1 time step.
+
+        Args:
+            x_t: numpy.ndarray - (m, i) Data input for the cell.
+                m: Batch size for the data.
+            h_next: numpy.ndarray - (m, h) Next hidden state.
+
+        Return: h_next
+            h_prev: Previous hidden state.
         """
-        concat = np.concatenate((h_next, x_t), axis=1)
-        h_prev = np.tanh(np.matmul(concat, self.Whb) + self.bhb)
-        return h_prev
+
+        dot_x = np.dot(x_t, self.Whb[h_next.shape[1]:, :])
+        dot_h = np.dot(h_next, self.Whb[:h_next.shape[1], :])
+        return np.tanh(dot_x + dot_h + self.bhb)

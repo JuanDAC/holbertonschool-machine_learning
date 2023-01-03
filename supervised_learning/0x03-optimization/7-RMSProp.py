@@ -6,9 +6,7 @@ import numpy as np
 def update_variables_RMSProp(alpha, beta2, epsilon, var, grad, s):
     """
     updates a variable using the RMSProp optimization
-        ...
-        Parameters
-        ----------
+    args:
         alpha: is the learning rate
         beta2:  is the RMSProp weight
         epsilon:  is a small number to avoid division by zero

@@ -1,43 +1,42 @@
 #!/usr/bin/env python3
 """
-File that contains the  bidirectional RNN
+Module contains function that performs forward
+propagation for a bidirectional RNN.
 """
+
+
 import numpy as np
 
 
 def bi_rnn(bi_cell, X, h_0, h_t):
     """
-    Function that performs forward propagation
-    for a bidirectional RNN
-    Arguments:
-        - bi_cell is an instance of BidirectinalCell that will
-                  be used for the forward propagation
-         X is the data to be used, given as a numpy.ndarray
-           of shape (t, m, i)
-            * t is the maximum number of time steps
-            * m is the batch size
-            * i is the dimensionality of the data
-        - h_0 is the initial hidden state in the forward direction,
-                 given as a numpy.ndarray of shape (m, h)
-            * h is the dimensionality of the hidden state
-        - h_t is the initial hidden state in the backward direction,
-              given as a numpy.ndarray of shape (m, h)
-    Returns: H, Y
-        - H is a numpy.ndarray containing all of the concatenated
-            hidden states
-        - Y is a numpy.ndarray containing all of the outputs
+    Performs forward propagation for a bidirectional RNN.
+
+    Args:
+        bi_cell: Instance of BidirectinalCell for forward propagation.
+        X: numpy.ndarray - (t, m, i) Data.
+            t: Maximum number of time steps.
+            m: Batch size.
+            i: Dimensionality of the data.
+        h_0: numpy.ndarray - (m, h) Initial hidden state - forward direction.
+            h: Dimensionality of the hidden state.
+        h_t: numpy.ndarray - (m, h) Initial hidden state - backward direction.
+            h: Dimensionality of the hidden state.
+
+    Return: H, Y
+        H: numpy.ndarray - Concatenated hidden states.
+        Y: numpy.ndarray - Outputs.
     """
-    t, m, i = X.shape
-    _, h = h_0.shape
-    Hf = np.zeros((t + 1, m, h))
-    Hb = np.zeros((t + 1, m, h))
-    H = np.zeros((t + 1, m, 2 * h))
-    Y = []
-    Hf[0] = h_0
-    Hb[t] = h_t
-    for step in range(t):
-        Hf[step + 1], _ = bi_cell.forward(Hf[step], X[step])
-        Hb[t - step - 1], _ = bi_cell.backward(Hb[t - step], X[t - step - 1])
-        H[step + 1] = np.concatenate((Hf[step + 1], Hb[t - step - 1]), axis=1)
-    Y = bi_cell.output(H)
-    return H, Y
+
+    Hf, Hb, h_next, h_prev = [], [], h_t, h_0
+
+    for x, rev_x in zip(X, X[::-1]):
+        h_prev = bi_cell.forward(h_prev, x)
+        h_next = bi_cell.backward(h_next, rev_x)
+
+        Hf.append(h_prev)
+        Hb = [h_next] + Hb
+
+    H = np.concatenate((np.stack(Hf), np.stack(Hb)), axis=-1)
+
+    return H, bi_cell.output(H)

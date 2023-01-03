@@ -7,15 +7,13 @@ def create_momentum_op(loss, alpha, beta1):
     """
        Creates the training operation for a neural network in tensorflow
        using the gradient descent with momentum optimization algorithm.
-        ...
-        Parameters
-        ----------
+       Args:
          loss: loss of the network
          alpha: learning rate
          beta1: momentum weight
        Returns:
          The momentum optimization operation.
-        Optimizer that implements the Momentum algorithm.
     """
+    # tensorflow: Optimizer that implements the Momentum algorithm.
     momentun = tf.train.MomentumOptimizer(alpha, beta1)
     return momentun.minimize(loss)

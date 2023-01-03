@@ -6,9 +6,7 @@ import numpy as np
 def moving_average(data, beta):
     """
         calculates the weighted moving average of a data set
-        ...
-        Parameters
-        ----------
+        args:
             data: list of data to calculate the moving average of
             beta: weight used for the moving average
         return:

@@ -1,66 +1,91 @@
 #!/usr/bin/env python3
 """
-File that contains the class RNNCell
+Module contains class GRUCell, representing a Gated
+Recurrent Unit for an RNN.
 """
+
 
 import numpy as np
 
 
-class GRUCell:
-    """
-    Class GRUCell that represents a gated recurrent unit
-    """
+class GRUCell():
+    """Represents a Gated Recurrent Unit"""
 
     def __init__(self, i, h, o):
         """
-        Constructor that initializes the public instance attributes
-        Attributes:
-            - i is the dimensionality of the data
-            - h is the dimensionality of the hidden state
-            - o is the dimensionality of the outputs
-        Public instance attributes:
-            - Wz: weights for the update gate
-            - Wr: weights for the reset gate
-            - Wh: weights for the intermediate hidden state
-            - Wy: weights for the output
-            - bz: bias for the update gate
-            - br: bias for the reset gate
-            - bh: bias for the intermediate hidden state
-            - by: bias for the output
+        Class constructor.
+
+        Args:
+            i: Dimensionality of the data.
+            h: Dimensionality of the hidden state.
+            o: Dimensionality of the outputs.
+
+        Public Attributes:
+            Wh: Hidden state weights.
+            bh: Hidden state biases.
+            Wy: Output weights.
+            by: Output biases.
+            Wz: Update gate weights.
+            bz: Update gate biases.
+            Wr: Reset gate weights.
+            br: Reset gate biases.
         """
-        self.Wz = np.random.normal(size=(i + h, h))
-        self.Wr = np.random.normal(size=(i + h, h))
-        self.Wh = np.random.normal(size=(i + h, h))
-        self.Wy = np.random.normal(size=(h, o))
-        self.bz = np.zeros((1, h))
-        self.br = np.zeros((1, h))
+
+        self.Wz = np.random.randn(i+h, h)
+        self.Wr = np.random.randn(i+h, h)
+        self.Wh = np.random.randn(i+h, h)
+        self.Wy = np.random.randn(h, o)
         self.bh = np.zeros((1, h))
         self.by = np.zeros((1, o))
+        self.bz = np.zeros((1, h))
+        self.br = np.zeros((1, h))
+
+    @staticmethod
+    def softmax(x):
+        """softmax activation function"""
+
+        max = np.max(x, axis=1, keepdims=True)
+        e_x = np.exp(x - max)
+        sum = np.sum(e_x, axis=1, keepdims=True)
+        f_x = e_x / sum
+        return f_x
+
+    @staticmethod
+    def sigmoid(x):
+        """sigmoid function"""
+        return 1/(1 + np.exp(-x))
 
     def forward(self, h_prev, x_t):
         """
-        Method that performs forward propagation for one time step
-        Arguments:
-            - h_prev: numpy.ndarray of shape (m, h) containing the
-                        previous hidden state
-            - x_t: numpy.ndarray of shape (m, i) that contains the
-                    data input for the cell
-        Returns:
-            - h_next is the next hidden state
-            - y is the output of the cell
+        Performs forward propogation for 1 time step.
+
+        Args:
+            x_t: numpy.ndarray - (m, i) Data input for the cell.
+                m: Batch size for the data.
+            h_prev: numpy.ndarray - (m, h) Previous hidden state.
+
+        Return: h_next, y
+            h_next: Next hidden state.
+            y: Output of the cell.
         """
-        z = np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
-                             self.Wz) + self.bz) / \
-            (np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
-                              self.Wz) + self.bz) + 1)
-        r = np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
-                             self.Wr) + self.br) / \
-            (np.exp(np.matmul(np.concatenate((h_prev, x_t), axis=1),
-                              self.Wr) + self.br) + 1)
-        h = np.tanh(np.matmul(np.concatenate((r * h_prev, x_t), axis=1),
-                              self.Wh) + self.bh)
-        h_next = (1 - z) * h_prev + z * h
-        y = np.exp(np.matmul(h_next, self.Wy) + self.by) / \
-            np.sum(np.exp(np.matmul(h_next, self.Wy) + self.by),
-                   axis=1, keepdims=True)
-        return h_next, y
+
+        H_SHAPE = h_prev.shape[1]
+
+        # Reset Gate
+        dot_xr = np.dot(x_t, self.Wr[H_SHAPE:, :])
+        dot_hr = np.dot(h_prev, self.Wr[:H_SHAPE, :])
+        R = self.sigmoid(dot_xr + dot_hr + self.br)
+
+        # Update Gate
+        dot_xz = np.dot(x_t, self.Wz[H_SHAPE:, :])
+        dot_hz = np.dot(h_prev, self.Wz[:H_SHAPE, :])
+        Z = self.sigmoid(dot_xz + dot_hz + self.bz)
+
+        # Candidate Hidden State
+        dot_xh = np.dot(x_t, self.Wh[H_SHAPE:, :])
+        dot_Rhh = np.dot(h_prev * R, self.Wh[:H_SHAPE, :])
+        C = np.tanh(dot_xh + dot_Rhh + self.bh)
+
+        h_next = (1 - Z) * h_prev + Z * C
+
+        return h_next, self.softmax(np.dot(h_next, self.Wy) + self.by)

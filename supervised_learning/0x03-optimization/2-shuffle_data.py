@@ -6,9 +6,7 @@ import numpy as np
 def shuffle_data(X, Y):
     """
         shuffles the data points in two matrices the same way
-        ...
-        Parameters
-        ----------
+        Args:
             X: numpy.ndarray - shape(m, nx) - matriz to shuffle
             Y: numpy.ndarray - shape(m, ny) - matriz to shuffle
     """

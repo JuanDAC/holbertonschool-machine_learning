@@ -1,221 +1,186 @@
-Curriculum Specializations Average: 50.95%\* [
-
-                  Foundations
-
-
-                  Average: 103.37%
-
-](https://intranet.hbtn.io/curriculums/1/observe)
-
-- [
-  Specializations
-
-                  Average: 50.95%
-
-](https://intranet.hbtn.io/curriculums/2/observe)
-
-            You are currently connected as Student            Switch to:            [Staff](https://intranet.hbtn.io/users/switch_viewing_as_permission_group?group=staff)
-
-|  # 0x0D. RNNs
-
+# 0x0D. RNNs
 ## Details
-
-By: Alexa Orrico, Software Engineer at Holberton School Weight: 4Project over - took place fromAug 29, 2022 12:00 AMto Sep 2, 2022 12:00 AM An auto review will be launched at the deadline#### In a nutshell…
-
-- Auto QA review: 0.0/40 mandatory
-- Altogether:  0.0%\* Mandatory: 0.0%
-- Optional: no optional tasks
-
-![](https://holbertonintranet.s3.amazonaws.com/uploads/medias/2019/9/7d22ddd815bf6db4715b.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOU5BHMTQX4%2F20220929%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220929T172355Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=0b4d8efc0410f3a6e0165ee96f32f2a57a52041899f79a7643eedd262c682cbe)
+ By: Alexa Orrico, Software Engineer at Holberton School Weight: 4Project will startAug 29, 2022 12:00 AM, must end bySep 2, 2022 12:00 AMwill be released atSep 1, 2022 4:48 AM An auto review will be launched at the deadline ![](https://holbertonintranet.s3.amazonaws.com/uploads/medias/2019/9/7d22ddd815bf6db4715b.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOU5BHMTQX4%2F20220831%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220831T165236Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=3635c229563fb5d1e0a14f5b724068d568c3853f74348a8aae64cdf0cd4b2ad3) 
 
 ## Resources
-
 Read or watch:
+* [MIT 6.S191: RNN](https://intranet.hbtn.io/rltoken/Ieq2tq5_KT9WATwCd3W9Zw) 
 
-- [MIT 6.S191: RNN](https://intranet.hbtn.io/rltoken/Ieq2tq5_KT9WATwCd3W9Zw)
+* [Introduction to RNNs](https://intranet.hbtn.io/rltoken/1NadrFVH3WOV-fnrHyuzdA) 
 
-- [Introduction to RNNs](https://intranet.hbtn.io/rltoken/1NadrFVH3WOV-fnrHyuzdA)
+* [Illustrated Guide to RNNs](https://intranet.hbtn.io/rltoken/lcA2CzvOeYI8HlfpcBGoPA) 
 
-- [Illustrated Guide to RNNs](https://intranet.hbtn.io/rltoken/lcA2CzvOeYI8HlfpcBGoPA)
+* [Illustrated Guide to LSTM’s and GRU’s: A step by step explanation](https://intranet.hbtn.io/rltoken/9CBtiOOT38BE8k2lomakog) 
 
-- [Illustrated Guide to LSTM’s and GRU’s: A step by step explanation](https://intranet.hbtn.io/rltoken/9CBtiOOT38BE8k2lomakog)
+* [RNNs Tutorial, Parts 1](https://intranet.hbtn.io/rltoken/7iC7MXNM3MqyZtThfhwO-g) 
 
-- [RNNs Tutorial, Parts 1](https://intranet.hbtn.io/rltoken/5at81KLtang5kCM7wKi2XQ)
+* [RNNs Tutorial, Parts 2](https://intranet.hbtn.io/rltoken/BdyOnFWlQKKC886DOVzZNQ) 
 
-- [RNNs Tutorial, Parts 2](https://intranet.hbtn.io/rltoken/BdyOnFWlQKKC886DOVzZNQ)
+* [RNNs Tutorial, Parts 3](https://intranet.hbtn.io/rltoken/g5R9eDVTJjxWoGH2nGCl6w) 
 
-- [RNNs Tutorial, Parts 3](https://intranet.hbtn.io/rltoken/g5R9eDVTJjxWoGH2nGCl6w)
+* [RNNs Tutorial, Parts 4](https://intranet.hbtn.io/rltoken/J5LBLn2roqEUSVcdP4KQAw) 
+* NOTE: There is a slight mistake in the last equation for the GRU cell. It should instead be: ` s_t = (1 - z) * s_t-1 + z * h ` 
 
-- [RNNs Tutorial, Parts 4](https://intranet.hbtn.io/rltoken/J5LBLn2roqEUSVcdP4KQAw)
-- NOTE: There is a slight mistake in the last equation for the GRU cell. It should instead be: `s_t = (1 - z) * s_t-1 + z * h`
+* [Bidirectional RNN Indepth Intuition- Deep Learning Tutorial](https://intranet.hbtn.io/rltoken/NtmABToAopw10e1FEr1cHw) 
 
-- [Bidirectional RNN Indepth Intuition- Deep Learning Tutorial](https://intranet.hbtn.io/rltoken/NtmABToAopw10e1FEr1cHw)
-
-- [Deep RNN](https://intranet.hbtn.io/rltoken/F6Z4d3h-t4Yv3rSvQohBtA)
+* [Deep RNN](https://intranet.hbtn.io/rltoken/F6Z4d3h-t4Yv3rSvQohBtA) 
 
 Definitions to Skim:
+* [RNN](https://intranet.hbtn.io/rltoken/67CDxqXCd1Z_7N6NyFqQww) 
 
-- [RNN](https://intranet.hbtn.io/rltoken/67CDxqXCd1Z_7N6NyFqQww)
+* [GRU](https://intranet.hbtn.io/rltoken/jqUl7hMSCfBh40QLz0DzsA) 
 
-- [GRU](https://intranet.hbtn.io/rltoken/jqUl7hMSCfBh40QLz0DzsA)
+* [LSTM](https://intranet.hbtn.io/rltoken/Dt1k2SQxDrWQooeBj17xDw) 
 
-- [LSTM](https://intranet.hbtn.io/rltoken/Dt1k2SQxDrWQooeBj17xDw)
-
-- [BRNN](https://intranet.hbtn.io/rltoken/xJtOVXzAThX1hxCf6jDiag)
+* [BRNN](https://intranet.hbtn.io/rltoken/xJtOVXzAThX1hxCf6jDiag) 
 
 ## Requirements
-
 ### General
-
-- Allowed editors: `vi` , `vim` , `emacs`
-- All your files will be interpreted/compiled on Ubuntu 16.04 LTS using `python3` (version 3.5)
-- Your files will be executed with `numpy` (version 1.15)
-- All your files should end with a new line
-- The first line of all your files should be exactly `#!/usr/bin/env python3`
-- A `README.md` file, at the root of the folder of the project, is mandatory
-- Your code should use the `pycodestyle` style (version 2.4)
-- All your modules should have documentation ( `python3 -c 'print(__import__("my_module").__doc__)'` )
-- All your classes should have documentation ( `python3 -c 'print(__import__("my_module").MyClass.__doc__)'` )
-- All your functions (inside and outside a class) should have documentation ( `python3 -c 'print(__import__("my_module").my_function.__doc__)'` and `python3 -c 'print(__import__("my_module").MyClass.my_function.__doc__)'` )
-- Unless otherwise noted, you are not allowed to import any module except `import numpy as np`
-
+* Allowed editors:  ` vi ` ,  ` vim ` ,  ` emacs ` 
+* All your files will be interpreted/compiled on Ubuntu 16.04 LTS using  ` python3 `  (version 3.5)
+* Your files will be executed with  ` numpy `  (version 1.15)
+* All your files should end with a new line
+* The first line of all your files should be exactly  ` #!/usr/bin/env python3 ` 
+* A  ` README.md `  file, at the root of the folder of the project, is mandatory
+* Your code should use the  ` pycodestyle `  style (version 2.4)
+* All your modules should have documentation ( ` python3 -c 'print(__import__("my_module").__doc__)' ` )
+* All your classes should have documentation ( ` python3 -c 'print(__import__("my_module").MyClass.__doc__)' ` )
+* All your functions (inside and outside a class) should have documentation ( ` python3 -c 'print(__import__("my_module").my_function.__doc__)' `  and  ` python3 -c 'print(__import__("my_module").MyClass.my_function.__doc__)' ` )
+* Unless otherwise noted, you are not allowed to import any module except  ` import numpy as np ` 
 ### Quiz questions
-
-Great! You've completed the quiz successfully! Keep going! (Show quiz)####
-
+Great!          You've completed the quiz successfully! Keep going!          (Show quiz)#### 
+        
         Question #0
-
-Quiz question Body ![](https://holbertonintranet.s3.amazonaws.com/uploads/medias/2020/3/de01006f78ee385820615002c3bf281f22e1b1af.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOU5BHMTQX4%2F20220929%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220929T172355Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=59839242c14b59787d55e9516a1b0f746a8f9c8c1456625a5d2ac896091ca785)
+    
+ Quiz question Body  ![](https://holbertonintranet.s3.amazonaws.com/uploads/medias/2020/3/de01006f78ee385820615002c3bf281f22e1b1af.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOU5BHMTQX4%2F20220831%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220831T165236Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=e2e9f13c00fd6bbc37dcf1556cff0415c81b014a4d18bc4bfc2d0ac53806524f) 
 
 For the following questions, base your answers on the diagram above.
 Which are RNNs?
-Quiz question Answers \* A
+ Quiz question Answers * A
 
-- B
+* B
 
-- C
+* C
 
-- D
+* D
 
-- E
+* E
 
-- F
+* F
 
-- G
+* G
 
-- H
+* H
 
-Quiz question Tips ####
-
+ Quiz question Tips #### 
+        
         Question #1
+    
+ Quiz question Body Which are basic RNNs?
+ Quiz question Answers * A
 
-Quiz question Body Which are basic RNNs?
-Quiz question Answers \* A
+* B
 
-- B
+* C
 
-- C
+* D
 
-- D
+* E
 
-- E
+* F
 
-- F
+* G
 
-- G
+* H
 
-- H
-
-Quiz question Tips ####
-
+ Quiz question Tips #### 
+        
         Question #2
+    
+ Quiz question Body Which are Deep RNNs?
+ Quiz question Answers * A
 
-Quiz question Body Which are Deep RNNs?
-Quiz question Answers \* A
+* B
 
-- B
+* C
 
-- C
+* D
 
-- D
+* E
 
-- E
+* F
 
-- F
+* G
 
-- G
+* H
 
-- H
-
-Quiz question Tips ####
-
+ Quiz question Tips #### 
+        
         Question #3
+    
+ Quiz question Body Which are Bidirectional RNNs?
+ Quiz question Answers * A
 
-Quiz question Body Which are Bidirectional RNNs?
-Quiz question Answers \* A
+* B
 
-- B
+* C
 
-- C
+* D
 
-- D
+* E
 
-- E
+* F
 
-- F
+* G
 
-- G
+* H
 
-- H
-
-Quiz question Tips ####
-
+ Quiz question Tips #### 
+        
         Question #4
+    
+ Quiz question Body What does RNN stand for?
+ Quiz question Answers * Recursive Neural Network
 
-Quiz question Body What does RNN stand for?
-Quiz question Answers \* Recursive Neural Network
+* Radial Neural Network
 
-- Radial Neural Network
+* Recurrent Neural Network
 
-- Recurrent Neural Network
+* Representational Neural Network
 
-- Representational Neural Network
-
-Quiz question Tips ####
-
+ Quiz question Tips #### 
+        
         Question #5
+    
+ Quiz question Body RNNs are typically used to analyze data that:
+ Quiz question Answers * cannot be classified
 
-Quiz question Body RNNs are typically used to analyze data that:
-Quiz question Answers \* cannot be classified
+* is temporal in nature
 
-- is temporal in nature
+* is too large for other types of networks
 
-- is too large for other types of networks
+* is too small for other types of networks
 
-- is too small for other types of networks
-
-Quiz question Tips ## Tasks
-
+ Quiz question Tips ## Tasks
 ### 0. RNN Cell
+          mandatory         Progress vs Score  Task Body Create the class   ` RNNCell `   that represents a cell of a simple RNN:
+* class constructor  ` def __init__(self, i, h, o): ` *  ` i `  is the dimensionality of the data
+*  ` h `  is the dimensionality of the hidden state
+*  ` o `  is the dimensionality of the outputs
+* Creates the public instance attributes  ` Wh ` ,  ` Wy ` ,  ` bh ` ,  ` by `  that represent the weights and biases of the cell*  ` Wh `  and  ` bh `  are for the concatenated hidden state and input data
+*  ` Wy `  and  ` by `  are for the output
 
-          mandatory         Progress vs Score           Score: 0.00% (Checks completed: 0.00%)         Task Body Create the class   ` RNNCell `   that represents a cell of a simple RNN:
+* The weights should be initialized using a random normal distribution in the order listed above
+* The weights will be used on the right side for matrix multiplication
+* The biases should be initialized as zeros
 
-- class constructor `def __init__(self, i, h, o):` \* `i` is the dimensionality of the data
-- `h` is the dimensionality of the hidden state
-- `o` is the dimensionality of the outputs
-- Creates the public instance attributes `Wh` , `Wy` , `bh` , `by` that represent the weights and biases of the cell\* `Wh` and `bh` are for the concatenated hidden state and input data
-- `Wy` and `by` are for the output
+* public instance method  ` def forward(self, h_prev, x_t): `  that performs forward propagation for one time step*  ` x_t `  is a  ` numpy.ndarray `  of shape  ` (m, i) `  that contains the data input for the cell*  ` m `  is the batch size for the data
 
-- The weights should be initialized using a random normal distribution in the order listed above
-- The weights will be used on the right side for matrix multiplication
-- The biases should be initialized as zeros
+*  ` h_prev `  is a  ` numpy.ndarray `  of shape  ` (m, h) `  containing the previous hidden state
+* The output of the cell should use a softmax activation function
+* Returns:  ` h_next, y ` *  ` h_next `  is the next hidden state
+*  ` y `  is the output of the cell
 
-- public instance method `def forward(self, h_prev, x_t):` that performs forward propagation for one time step* `x_t` is a `numpy.ndarray` of shape `(m, i)` that contains the data input for the cell* `m` is the batch size for the data
-
-- `h_prev` is a `numpy.ndarray` of shape `(m, h)` containing the previous hidden state
-- The output of the cell should use a softmax activation function
-- Returns: `h_next, y` \* `h_next` is the next hidden state
-- `y` is the output of the cell
 
 ```bash
 $ cat 0-main.py
@@ -377,27 +342,22 @@ by: [[0. 0. 0. 0. 0.]]
 $
 
 ```
-
-Task URLs Github information Repo:
-
-- GitHub repository: `holbertonschool-machine_learning`
-- Directory: `supervised_learning/0x0D-RNNs`
-- File: `0-rnn_cell.py`
-  Self-paced manual review Panel footer - Controls
-
+ Task URLs  Github information Repo:
+* GitHub repository:  ` holbertonschool-machine_learning ` 
+* Directory:  ` supervised_learning/0x0D-RNNs ` 
+* File:  ` 0-rnn_cell.py ` 
+ Self-paced manual review  Panel footer - Controls 
 ### 1. RNN
+          mandatory         Progress vs Score  Task Body Write the function   ` def rnn(rnn_cell, X, h_0): `   that performs forward propagation for a simple RNN:
+*  ` rnn_cell `  is an instance of  ` RNNCell `  that will be used for the forward propagation
+*  ` X `  is the data to be used, given as a  ` numpy.ndarray `  of shape  ` (t, m, i) ` *  ` t `  is the maximum number of time steps
+*  ` m `  is the batch size
+*  ` i `  is the dimensionality of the data
 
-          mandatory         Progress vs Score           Score: 0.00% (Checks completed: 0.00%)         Task Body Write the function   ` def rnn(rnn_cell, X, h_0): `   that performs forward propagation for a simple RNN:
+*  ` h_0 `  is the initial hidden state, given as a  ` numpy.ndarray `  of shape  ` (m, h) ` *  ` h `  is the dimensionality of the hidden state
 
-- `rnn_cell` is an instance of `RNNCell` that will be used for the forward propagation
-- `X` is the data to be used, given as a `numpy.ndarray` of shape `(t, m, i)` \* `t` is the maximum number of time steps
-- `m` is the batch size
-- `i` is the dimensionality of the data
-
-- `h_0` is the initial hidden state, given as a `numpy.ndarray` of shape `(m, h)` \* `h` is the dimensionality of the hidden state
-
-- Returns: `H, Y` \* `H` is a `numpy.ndarray` containing all of the hidden states
-- `Y` is a `numpy.ndarray` containing all of the outputs
+* Returns:  ` H, Y ` *  ` H `  is a  ` numpy.ndarray `  containing all of the hidden states
+*  ` Y `  is a  ` numpy.ndarray `  containing all of the outputs
 
 ```bash
 $ cat 1-main.py
@@ -699,36 +659,32 @@ $ ./1-main.py
 $
 
 ```
-
-Task URLs Github information Repo:
-
-- GitHub repository: `holbertonschool-machine_learning`
-- Directory: `supervised_learning/0x0D-RNNs`
-- File: `1-rnn.py`
-  Self-paced manual review Panel footer - Controls
-
+ Task URLs  Github information Repo:
+* GitHub repository:  ` holbertonschool-machine_learning ` 
+* Directory:  ` supervised_learning/0x0D-RNNs ` 
+* File:  ` 1-rnn.py ` 
+ Self-paced manual review  Panel footer - Controls 
 ### 2. GRU Cell
+          mandatory         Progress vs Score  Task Body Create the class   ` GRUCell `   that represents a gated recurrent unit:
+* class constructor  ` def __init__(self, i, h, o): ` *  ` i `  is the dimensionality of the data
+*  ` h `  is the dimensionality of the hidden state
+*  ` o `  is the dimensionality of the outputs
+* Creates the public instance attributes  ` Wz ` ,  ` Wr ` ,  ` Wh ` ,  ` Wy ` ,  ` bz ` ,  ` br ` ,  ` bh ` ,  ` by `  that represent the weights and biases of the cell*  ` Wz ` and  ` bz `  are for the update gate
+*  ` Wr ` and  ` br `  are for the reset gate
+*  ` Wh ` and  ` bh `  are for the intermediate hidden state
+*  ` Wy ` and  ` by `  are for the output
 
-          mandatory         Progress vs Score           Score: 0.00% (Checks completed: 0.00%)         Task Body Create the class   ` GRUCell `   that represents a gated recurrent unit:
+* The weights should be initialized using a random normal distribution in the order listed above
+* The weights will be used on the right side for matrix multiplication
+* The biases should be initialized as zeros
 
-- class constructor `def __init__(self, i, h, o):` \* `i` is the dimensionality of the data
-- `h` is the dimensionality of the hidden state
-- `o` is the dimensionality of the outputs
-- Creates the public instance attributes `Wz` , `Wr` , `Wh` , `Wy` , `bz` , `br` , `bh` , `by` that represent the weights and biases of the cell\* `Wz` and `bz` are for the update gate
-- `Wr` and `br` are for the reset gate
-- `Wh` and `bh` are for the intermediate hidden state
-- `Wy` and `by` are for the output
+* public instance method  ` def forward(self, h_prev, x_t): `  that performs forward propagation for one time step*  ` x_t `  is a  ` numpy.ndarray `  of shape  ` (m, i) `  that contains the data input for the cell*  ` m `  is the batch size for the data
 
-- The weights should be initialized using a random normal distribution in the order listed above
-- The weights will be used on the right side for matrix multiplication
-- The biases should be initialized as zeros
+*  ` h_prev `  is a  ` numpy.ndarray `  of shape  ` (m, h) `  containing the previous hidden state
+* The output of the cell should use a softmax activation function
+* Returns:  ` h_next, y ` *  ` h_next `  is the next hidden state
+*  ` y `  is the output of the cell
 
-- public instance method `def forward(self, h_prev, x_t):` that performs forward propagation for one time step* `x_t` is a `numpy.ndarray` of shape `(m, i)` that contains the data input for the cell* `m` is the batch size for the data
-
-- `h_prev` is a `numpy.ndarray` of shape `(m, h)` containing the previous hidden state
-- The output of the cell should use a softmax activation function
-- Returns: `h_next, y` \* `h_next` is the next hidden state
-- `y` is the output of the cell
 
 ```bash
 $ cat 2-main.py
@@ -1123,39 +1079,35 @@ by: [[0. 0. 0. 0. 0.]]
 $
 
 ```
-
-Task URLs Github information Repo:
-
-- GitHub repository: `holbertonschool-machine_learning`
-- Directory: `supervised_learning/0x0D-RNNs`
-- File: `2-gru_cell.py`
-  Self-paced manual review Panel footer - Controls
-
+ Task URLs  Github information Repo:
+* GitHub repository:  ` holbertonschool-machine_learning ` 
+* Directory:  ` supervised_learning/0x0D-RNNs ` 
+* File:  ` 2-gru_cell.py ` 
+ Self-paced manual review  Panel footer - Controls 
 ### 3. LSTM Cell
+          mandatory         Progress vs Score  Task Body Create the class   ` LSTMCell `   that represents an LSTM unit:
+* class constructor  ` def __init__(self, i, h, o): ` *  ` i `  is the dimensionality of the data
+*  ` h `  is the dimensionality of the hidden state
+*  ` o `  is the dimensionality of the outputs
+* Creates the public instance attributes  ` Wf ` ,  ` Wu ` ,  ` Wc ` ,  ` Wo ` ,  ` Wy ` ,  ` bf ` ,  ` bu ` ,  ` bc ` ,  ` bo ` ,  ` by `  that represent the weights and biases of the cell*  ` Wf ` and  ` bf `  are for the forget gate
+*  ` Wu ` and  ` bu `  are for the update gate
+*  ` Wc ` and  ` bc `  are for the intermediate cell state
+*  ` Wo ` and  ` bo `  are for the output gate
+*  ` Wy ` and  ` by `  are for the outputs
 
-          mandatory         Progress vs Score           Score: 0.00% (Checks completed: 0.00%)         Task Body Create the class   ` LSTMCell `   that represents an LSTM unit:
+* The weights should be initialized using a random normal distribution in the order listed above
+* The weights will be used on the right side for matrix multiplication
+* The biases should be initialized as zeros
 
-- class constructor `def __init__(self, i, h, o):` \* `i` is the dimensionality of the data
-- `h` is the dimensionality of the hidden state
-- `o` is the dimensionality of the outputs
-- Creates the public instance attributes `Wf` , `Wu` , `Wc` , `Wo` , `Wy` , `bf` , `bu` , `bc` , `bo` , `by` that represent the weights and biases of the cell\* `Wf` and `bf` are for the forget gate
-- `Wu` and `bu` are for the update gate
-- `Wc` and `bc` are for the intermediate cell state
-- `Wo` and `bo` are for the output gate
-- `Wy` and `by` are for the outputs
+* public instance method  ` def forward(self, h_prev, c_prev, x_t): `  that performs forward propagation for one time step*  ` x_t `  is a  ` numpy.ndarray `  of shape  ` (m, i) `  that contains the data input for the cell*  ` m `  is the batche size for the data
 
-- The weights should be initialized using a random normal distribution in the order listed above
-- The weights will be used on the right side for matrix multiplication
-- The biases should be initialized as zeros
+*  ` h_prev `  is a  ` numpy.ndarray `  of shape  ` (m, h) `  containing the previous hidden state
+*  ` c_prev `  is a  ` numpy.ndarray `  of shape  ` (m, h) `  containing the previous cell state
+* The output of the cell should use a softmax activation function
+* Returns:  ` h_next, c_next, y ` *  ` h_next `  is the next hidden state
+*  ` c_next `  is the next cell state
+*  ` y `  is the output of the cell
 
-- public instance method `def forward(self, h_prev, c_prev, x_t):` that performs forward propagation for one time step* `x_t` is a `numpy.ndarray` of shape `(m, i)` that contains the data input for the cell* `m` is the batche size for the data
-
-- `h_prev` is a `numpy.ndarray` of shape `(m, h)` containing the previous hidden state
-- `c_prev` is a `numpy.ndarray` of shape `(m, h)` containing the previous cell state
-- The output of the cell should use a softmax activation function
-- Returns: `h_next, c_next, y` \* `h_next` is the next hidden state
-- `c_next` is the next cell state
-- `y` is the output of the cell
 
 ```bash
 $ cat 3-main.py
@@ -1648,28 +1600,23 @@ by: [[0. 0. 0. 0. 0.]]
 $
 
 ```
-
-Task URLs Github information Repo:
-
-- GitHub repository: `holbertonschool-machine_learning`
-- Directory: `supervised_learning/0x0D-RNNs`
-- File: `3-lstm_cell.py`
-  Self-paced manual review Panel footer - Controls
-
+ Task URLs  Github information Repo:
+* GitHub repository:  ` holbertonschool-machine_learning ` 
+* Directory:  ` supervised_learning/0x0D-RNNs ` 
+* File:  ` 3-lstm_cell.py ` 
+ Self-paced manual review  Panel footer - Controls 
 ### 4. Deep RNN
+          mandatory         Progress vs Score  Task Body Write the function   ` def deep_rnn(rnn_cells, X, h_0): `   that performs forward propagation for a deep RNN:
+*  ` rnn_cells `  is a list of  ` RNNCell `   instances of length  ` l `  that will be used for the forward propagation*  ` l `  is the number of layers
 
-          mandatory         Progress vs Score           Score: 0.00% (Checks completed: 0.00%)         Task Body Write the function   ` def deep_rnn(rnn_cells, X, h_0): `   that performs forward propagation for a deep RNN:
+*  ` X `  is the data to be used, given as a  ` numpy.ndarray `  of shape  ` (t, m, i) ` *  ` t `  is the maximum number of time steps
+*  ` m `  is the batch size
+*  ` i `  is the dimensionality of the data
 
-- `rnn_cells` is a list of `RNNCell` instances of length `l` that will be used for the forward propagation\* `l` is the number of layers
+*  ` h_0 `  is the initial hidden state, given as a  ` numpy.ndarray `  of shape  ` (l, m, h) ` *  ` h `  is the dimensionality of the hidden state
 
-- `X` is the data to be used, given as a `numpy.ndarray` of shape `(t, m, i)` \* `t` is the maximum number of time steps
-- `m` is the batch size
-- `i` is the dimensionality of the data
-
-- `h_0` is the initial hidden state, given as a `numpy.ndarray` of shape `(l, m, h)` \* `h` is the dimensionality of the hidden state
-
-- Returns: `H, Y` \* `H` is a `numpy.ndarray` containing all of the hidden states
-- `Y` is a `numpy.ndarray` containing all of the outputs
+* Returns:  ` H, Y ` *  ` H `  is a  ` numpy.ndarray `  containing all of the hidden states
+*  ` Y `  is a  ` numpy.ndarray `  containing all of the outputs
 
 ```bash
 $ cat 4-main.py
@@ -2060,33 +2007,28 @@ $ ./4-main.py
 $
 
 ```
-
-Task URLs Github information Repo:
-
-- GitHub repository: `holbertonschool-machine_learning`
-- Directory: `supervised_learning/0x0D-RNNs`
-- File: `4-deep_rnn.py`
-  Self-paced manual review Panel footer - Controls
-
+ Task URLs  Github information Repo:
+* GitHub repository:  ` holbertonschool-machine_learning ` 
+* Directory:  ` supervised_learning/0x0D-RNNs ` 
+* File:  ` 4-deep_rnn.py ` 
+ Self-paced manual review  Panel footer - Controls 
 ### 5. Bidirectional Cell Forward
+          mandatory         Progress vs Score  Task Body Create the class   ` BidirectionalCell `   that represents a bidirectional cell of an RNN:
+* class constructor  ` def __init__(self, i, h, o): ` *  ` i `  is the dimensionality of the data
+*  ` h `  is the dimensionality of the hidden states
+*  ` o `  is the dimensionality of the outputs
+* Creates the public instance attributes  ` Whf ` ,  ` Whb ` ,  ` Wy ` ,  ` bhf ` ,  ` bhb ` ,  ` by `  that represent the weights and biases of the cell*  ` Whf `  and  ` bhf ` are for the hidden states in the forward direction
+*  ` Whb `  and  ` bhb ` are for the hidden states in the backward direction
+*  ` Wy `  and  ` by ` are for the outputs
 
-          mandatory         Progress vs Score           Score: 0.00% (Checks completed: 0.00%)         Task Body Create the class   ` BidirectionalCell `   that represents a bidirectional cell of an RNN:
+* The weights should be initialized using a random normal distribution in the order listed above
+* The weights will be used on the right side for matrix multiplication
+* The biases should be initialized as zeros
 
-- class constructor `def __init__(self, i, h, o):` \* `i` is the dimensionality of the data
-- `h` is the dimensionality of the hidden states
-- `o` is the dimensionality of the outputs
-- Creates the public instance attributes `Whf` , `Whb` , `Wy` , `bhf` , `bhb` , `by` that represent the weights and biases of the cell\* `Whf` and `bhf` are for the hidden states in the forward direction
-- `Whb` and `bhb` are for the hidden states in the backward direction
-- `Wy` and `by` are for the outputs
+* public instance method  ` def forward(self, h_prev, x_t): `  that calculates the hidden state in the forward direction for one time step*  ` x_t `  is a  ` numpy.ndarray `  of shape  ` (m, i) `  that contains the data input for the cell*  ` m `  is the batch size for the data
 
-- The weights should be initialized using a random normal distribution in the order listed above
-- The weights will be used on the right side for matrix multiplication
-- The biases should be initialized as zeros
-
-- public instance method `def forward(self, h_prev, x_t):` that calculates the hidden state in the forward direction for one time step* `x_t` is a `numpy.ndarray` of shape `(m, i)` that contains the data input for the cell* `m` is the batch size for the data
-
-- `h_prev` is a `numpy.ndarray` of shape `(m, h)` containing the previous hidden state
-- Returns: `h_next` , the next hidden state
+*  ` h_prev `  is a  ` numpy.ndarray `  of shape  ` (m, h) `  containing the previous hidden state
+* Returns:  ` h_next ` , the next hidden state
 
 ```bash
 $ cat 5-main.py
@@ -2321,22 +2263,17 @@ by: [[0. 0. 0. 0. 0.]]
 $
 
 ```
-
-Task URLs Github information Repo:
-
-- GitHub repository: `holbertonschool-machine_learning`
-- Directory: `supervised_learning/0x0D-RNNs`
-- File: `5-bi_forward.py`
-  Self-paced manual review Panel footer - Controls
-
+ Task URLs  Github information Repo:
+* GitHub repository:  ` holbertonschool-machine_learning ` 
+* Directory:  ` supervised_learning/0x0D-RNNs ` 
+* File:  ` 5-bi_forward.py ` 
+ Self-paced manual review  Panel footer - Controls 
 ### 6. Bidirectional Cell Backward
+          mandatory         Progress vs Score  Task Body Update the class   ` BidirectionalCell `  , based on   ` 5-bi_forward.py `  :
+* public instance method  ` def backward(self, h_next, x_t): `  that calculates the hidden state in the backward direction for one time step*  ` x_t `  is a  ` numpy.ndarray `  of shape  ` (m, i) `  that contains the data input for the cell*  ` m `  is the batch size for the data
 
-          mandatory         Progress vs Score           Score: 0.00% (Checks completed: 0.00%)         Task Body Update the class   ` BidirectionalCell `  , based on   ` 5-bi_forward.py `  :
-
-- public instance method `def backward(self, h_next, x_t):` that calculates the hidden state in the backward direction for one time step* `x_t` is a `numpy.ndarray` of shape `(m, i)` that contains the data input for the cell* `m` is the batch size for the data
-
-- `h_next` is a `numpy.ndarray` of shape `(m, h)` containing the next hidden state
-- Returns: `h_pev` , the previous hidden state
+*  ` h_next `  is a  ` numpy.ndarray `  of shape  ` (m, h) `  containing the next hidden state
+* Returns:  ` h_pev ` , the previous hidden state
 
 ```bash
 $ cat 6-main.py
@@ -2382,23 +2319,18 @@ $ ./6-main.py
 $
 
 ```
-
-Task URLs Github information Repo:
-
-- GitHub repository: `holbertonschool-machine_learning`
-- Directory: `supervised_learning/0x0D-RNNs`
-- File: `6-bi_backward.py`
-  Self-paced manual review Panel footer - Controls
-
+ Task URLs  Github information Repo:
+* GitHub repository:  ` holbertonschool-machine_learning ` 
+* Directory:  ` supervised_learning/0x0D-RNNs ` 
+* File:  ` 6-bi_backward.py ` 
+ Self-paced manual review  Panel footer - Controls 
 ### 7. Bidirectional Output
+          mandatory         Progress vs Score  Task Body Update the class   ` BidirectionalCell `  , based on   ` 6-bi_backward.py `  :
+* public instance method  ` def output(self, H): `  that calculates all outputs for the RNN:*  ` H `  is a  ` numpy.ndarray `  of shape  ` (t, m, 2 * h) `  that contains the concatenated hidden states from both directions, excluding their initialized states*  ` t `  is the number of time steps
+*  ` m `  is the batch size for the data
+*  ` h `  is the dimensionality of the hidden states
 
-          mandatory         Progress vs Score           Score: 0.00% (Checks completed: 0.00%)         Task Body Update the class   ` BidirectionalCell `  , based on   ` 6-bi_backward.py `  :
-
-- public instance method `def output(self, H):` that calculates all outputs for the RNN:_ `H` is a `numpy.ndarray` of shape ` (t, m, 2 _ h) `that contains the concatenated hidden states from both directions, excluding their initialized states*` t ` is the number of time steps
-- `m` is the batch size for the data
-- `h` is the dimensionality of the hidden states
-
-- Returns: `Y` , the outputs
+* Returns:  ` Y ` , the outputs
 
 ```bash
 $ cat 7-main.py
@@ -2520,28 +2452,23 @@ $ ./7-main.py
 $
 
 ```
-
-Task URLs Github information Repo:
-
-- GitHub repository: `holbertonschool-machine_learning`
-- Directory: `supervised_learning/0x0D-RNNs`
-- File: `7-bi_output.py`
-  Self-paced manual review Panel footer - Controls
-
+ Task URLs  Github information Repo:
+* GitHub repository:  ` holbertonschool-machine_learning ` 
+* Directory:  ` supervised_learning/0x0D-RNNs ` 
+* File:  ` 7-bi_output.py ` 
+ Self-paced manual review  Panel footer - Controls 
 ### 8. Bidirectional RNN
+          mandatory         Progress vs Score  Task Body Write the function   ` def bi_rnn(bi_cell, X, h_0, h_t): `   that performs forward propagation for a bidirectional RNN:
+*  ` bi_cell `  is an instance of  ` BidirectinalCell `  that will be used for the forward propagation
+*  ` X `  is the data to be used, given as a  ` numpy.ndarray `  of shape  ` (t, m, i) ` *  ` t `  is the maximum number of time steps
+*  ` m `  is the batch size
+*  ` i `  is the dimensionality of the data
 
-          mandatory         Progress vs Score           Score: 0.00% (Checks completed: 0.00%)         Task Body Write the function   ` def bi_rnn(bi_cell, X, h_0, h_t): `   that performs forward propagation for a bidirectional RNN:
+*  ` h_0 `  is the initial hidden state in the forward direction, given as a  ` numpy.ndarray `  of shape  ` (m, h) ` *  ` h `  is the dimensionality of the hidden state
 
-- `bi_cell` is an instance of `BidirectinalCell` that will be used for the forward propagation
-- `X` is the data to be used, given as a `numpy.ndarray` of shape `(t, m, i)` \* `t` is the maximum number of time steps
-- `m` is the batch size
-- `i` is the dimensionality of the data
-
-- `h_0` is the initial hidden state in the forward direction, given as a `numpy.ndarray` of shape `(m, h)` \* `h` is the dimensionality of the hidden state
-
-- `h_t` is the initial hidden state in the backward direction, given as a `numpy.ndarray` of shape `(m, h)`
-- Returns: `H, Y` \* `H` is a `numpy.ndarray` containing all of the concatenated hidden states
-- `Y` is a `numpy.ndarray` containing all of the outputs
+*  ` h_t `  is the initial hidden state in the backward direction, given as a  ` numpy.ndarray `  of shape  ` (m, h) ` 
+* Returns:  ` H, Y ` *  ` H `  is a  ` numpy.ndarray `  containing all of the concatenated hidden states
+*  ` Y `  is a  ` numpy.ndarray `  containing all of the outputs
 
 ```bash
 $ cat 8-main.py
@@ -2751,11 +2678,8 @@ $ ./8-main.py
 $
 
 ```
-
-Task URLs Github information Repo:
-
-- GitHub repository: `holbertonschool-machine_learning`
-- Directory: `supervised_learning/0x0D-RNNs`
-- File: `8-bi_rnn.py`
-  Self-paced manual review Panel footer - Controls
-  Copyright © 2022 Holberton Inc, All rights reserved.
+ Task URLs  Github information Repo:
+* GitHub repository:  ` holbertonschool-machine_learning ` 
+* Directory:  ` supervised_learning/0x0D-RNNs ` 
+* File:  ` 8-bi_rnn.py ` 
+ Self-paced manual review  Panel footer - Controls 

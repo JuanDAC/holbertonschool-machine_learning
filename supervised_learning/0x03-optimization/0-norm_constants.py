@@ -7,13 +7,9 @@ def normalization_constants(X):
     """
         calculates the normalization (standartization)
         constants of a matrix.
-        ...
-        Parameters
-        ----------
+        Args:
             X: numpy.ndarray - matrix to normalize
-        ...
-        Returns:
-        ----------
+        returns:
             The mean and standard deviation
             of each feature respectively.
     """
